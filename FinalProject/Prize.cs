@@ -16,11 +16,6 @@ namespace FinalProject
         private string price;
         private PrizeCategory category;
 
-        public string Name => name;
-        public string Description => description;
-        public string Price => price;
-        public PrizeCategory Category => category;
-
         public Prize()
         {
             display = new string[]
