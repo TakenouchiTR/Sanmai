@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\FinalProject"
+    "\\FinalProject",
+    "\\FinalProject\\Prizes\\Expensive",
+    "\\FinalProject\\Prizes\\Middle",
+    "\\FinalProject\\Prizes\\Zonk"
   ],
-  "SelectedNode": "\\FinalProject\\Program.cs",
+  "SelectedNode": "\\FinalProject.sln",
   "PreviewInSolutionExplorer": false
 }

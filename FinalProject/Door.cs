@@ -26,6 +26,7 @@ namespace FinalProject
         public int Bottom => Y + DOOR_HEIGHT;
         public int Number { get => number; set => number = value; }
         public int Frame { get => frame; set => frame = value; }
+        public bool Closed => Frame == 0;
         public Prize Prize { get => prize; set => prize = value; }
 
         public Door(int x, int y, int number)
@@ -49,9 +50,18 @@ namespace FinalProject
             }
         }
 
+        public void Close(int speed)
+        {
+            for (int i = 0; i < 14; i++)
+            {
+                Thread.Sleep(speed);
+                Frame--;
+                Draw();
+            }
+        }
+
         public void Draw()
         {
-            Console.CursorVisible = false;
             //Saves the cursor position and color so that it can be reset later
             ConsoleColor oldColor = Console.BackgroundColor;
             int cursorX = Console.CursorLeft;
@@ -73,7 +83,6 @@ namespace FinalProject
             Console.CursorLeft = cursorX;
             Console.CursorTop = cursorY;
             Console.BackgroundColor = oldColor;
-            Console.CursorVisible = true;
         }
 
         private void DrawBase() 

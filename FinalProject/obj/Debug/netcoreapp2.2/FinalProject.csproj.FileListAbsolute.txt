@@ -21,3 +21,6 @@ C:\Users\TOTak\Source\Repos\FinalProject\FinalProject\bin\Debug\netcoreapp2.2\Fi
 C:\Users\TOTak\Source\Repos\FinalProject\FinalProject\bin\Debug\netcoreapp2.2\FinalProject.dll
 C:\Users\TOTak\Source\Repos\FinalProject\FinalProject\bin\Debug\netcoreapp2.2\FinalProject.pdb
 C:\Users\TOTak\Source\Repos\FinalProject\FinalProject\obj\Debug\netcoreapp2.2\FinalProject.genruntimeconfig.cache
+C:\Users\scarte22\source\repos\FinalProject\FinalProject\bin\Debug\netcoreapp2.2\Prizes\Expensive\truck.txt
+C:\Users\scarte22\source\repos\FinalProject\FinalProject\bin\Debug\netcoreapp2.2\Prizes\Middle\tv.txt
+C:\Users\scarte22\source\repos\FinalProject\FinalProject\bin\Debug\netcoreapp2.2\Prizes\Zonk\dog.txt
