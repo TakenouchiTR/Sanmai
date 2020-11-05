@@ -42,9 +42,9 @@ namespace FinalProject
 
             textBox = new TextBox(doors[0].X + 2, doors[0].Bottom + 8, doors[2].Right - doors[0].X - 4, 7, BorderType.DoubleLine);
 
-            doors[0].Prize = Prize.FromFile("Prizes\\Middle\\tv.txt");
-            doors[1].Prize = Prize.FromFile("Prizes\\Expensive\\truck.txt");
-            doors[2].Prize = Prize.FromFile("Prizes\\Zonk\\dog.txt");
+            doors[0].Prize = Prize.FromFile("Prizes\\Middle\\tv.txt", PrizeCategory.Middle);
+            doors[1].Prize = Prize.FromFile("Prizes\\Expensive\\truck.txt", PrizeCategory.Expensive);
+            doors[2].Prize = Prize.FromFile("Prizes\\Zonk\\dog.txt", PrizeCategory.Zonk);
         }
 
         public void Play()
@@ -56,7 +56,20 @@ namespace FinalProject
                 b.Draw();
             textBox.DrawBorder();
 
+            textBox.WriteText("Welcome to Let's Make a Deal!", TextAlign.Center);
+            textBox.WriteText("--------------------", TextAlign.Center);
+            textBox.WriteText("Please use the left and right arrow keys to select a door. Once you've chosen a door that you like, " + 
+                "press Enter to open it. If you don't like what you got, you'll be given a chance to pick another door!");
+
             Prize prize = SelectDoor();
+
+            textBox.ClearText();
+            textBox.WriteText("You got a " + prize.Name + "!");
+            textBox.WriteText(prize.Description);
+            textBox.WriteText("This prize is worth a grand total of " + prize.Price + "!");
+            textBox.WriteText();
+            textBox.WriteText("If you don't want this, you can try your luck at one of the other doors!");
+
             foreach (Button b in doorButtons)
                 b.Hide();
 
@@ -64,9 +77,22 @@ namespace FinalProject
             {
                 foreach (Button b in doorButtons)
                     b.Draw();
+
                 activeDoor = (activeDoor + 1) % doorButtons.Length;
                 doorButtons[activeDoor].Toggle();
+
+                textBox.ClearText();
+                textBox.WriteText();
+                textBox.WriteText("Take your time, this is your last chance at getting something good!", TextAlign.Center);
+
                 prize = SelectDoor();
+
+                textBox.ClearText();
+                textBox.WriteText("This time, you got a " + prize.Name + "!");
+                textBox.WriteText(prize.Description);
+                textBox.WriteText("This prize is worth a grand total of " + prize.Price + "!");
+                textBox.WriteText();
+                textBox.WriteText("I hope you like this one better than the last one!");
             }
         }
 
@@ -105,8 +131,6 @@ namespace FinalProject
                         return doors[activeDoor].Prize;
                 }
             }
-
-            return null;
         }
     }
 }
