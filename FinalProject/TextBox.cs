@@ -32,9 +32,6 @@ namespace FinalProject
             this.height = height;
             this.borderType = borderType;
             textLine = 0;
-
-            WriteText("this is a test, please ignore this message. If this message is too long, it should wrap to the next line. Thank you and have a nice day.");
-            WriteText("-----This should be on a line on its own.");
         }
 
         public void DrawBorder()
@@ -81,13 +78,19 @@ namespace FinalProject
         public void WriteText(string text, TextAlign align = TextAlign.Left)
         {
             string[] words = text.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            if (words.Length == 0)
+            {
+                textLine++;
+                return;
+            }
+
             StringBuilder line = new StringBuilder();
             int maxLength = width - 2;
             int index = 0;
 
             while (index < words.Length)
             {
-                if (textLine > height - 2)
+                if (textLine >= height - 2)
                     return;
 
                 line.Append(words[index++]);
@@ -104,6 +107,11 @@ namespace FinalProject
                 line.Clear();
                 textLine++;
             }
+        }
+
+        public void WriteText()
+        {
+            textLine++;
         }
 
         public void ClearText()
