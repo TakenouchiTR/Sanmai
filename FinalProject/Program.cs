@@ -31,7 +31,7 @@ namespace FinalProject
             Console.OutputEncoding = Encoding.UTF8;
 
             Game game = new Game();
-            game.Play();
+            while (game.Play());
         }
     }
 }
