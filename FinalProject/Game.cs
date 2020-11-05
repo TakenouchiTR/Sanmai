@@ -10,16 +10,18 @@ namespace FinalProject
         private const ConsoleKey LEFT_KEY = ConsoleKey.LeftArrow;
         private const ConsoleKey ENTER_KEY = ConsoleKey.Enter;
 
-        private int activeButton;
+        private int activeDoor;
+        private int selectedDoor;
         private Door[] doors;
         private Button[] doorButtons;
 
         public Game()
         {
+            activeDoor = 0;
+            selectedDoor = -1;
             int screenWidth = Console.WindowWidth;
             int padding = 5;
             int doorCount = 3;
-            activeButton = 0;
 
             int doorX = screenWidth / 2 - Door.DOOR_WIDTH * doorCount / 2 - padding;
             int doorY = 2;
@@ -58,8 +60,8 @@ namespace FinalProject
             {
                 foreach (Button b in doorButtons)
                     b.Draw();
-                activeButton = (activeButton + 1) % doorButtons.Length;
-                doorButtons[activeButton].Toggle();
+                activeDoor = (activeDoor + 1) % doorButtons.Length;
+                doorButtons[activeDoor].Toggle();
                 prize = SelectDoor();
             }
         }
@@ -71,29 +73,32 @@ namespace FinalProject
                 switch (Console.ReadKey().Key)
                 {
                     case LEFT_KEY:
-                        doorButtons[activeButton].Toggle();
+                        doorButtons[activeDoor].Toggle();
 
-                        activeButton = activeButton == 0 ? doorButtons.Length - 1 : activeButton - 1;
-                        if (!doors[activeButton].Closed)
-                            activeButton = activeButton == 0 ? doorButtons.Length - 1 : activeButton - 1;
+                        activeDoor = activeDoor == 0 ? doorButtons.Length - 1 : activeDoor - 1;
+                        if (!doors[activeDoor].Closed)
+                            activeDoor = activeDoor == 0 ? doorButtons.Length - 1 : activeDoor - 1;
 
-                        doorButtons[activeButton].Toggle();
+                        doorButtons[activeDoor].Toggle();
                         break;
 
                     case RIGHT_KEY:
-                        doorButtons[activeButton].Toggle();
+                        doorButtons[activeDoor].Toggle();
 
-                        activeButton = (activeButton + 1) % doorButtons.Length;
-                        if (!doors[activeButton].Closed)
-                            activeButton = (activeButton + 1) % doorButtons.Length;
+                        activeDoor = (activeDoor + 1) % doorButtons.Length;
+                        if (!doors[activeDoor].Closed)
+                            activeDoor = (activeDoor + 1) % doorButtons.Length;
 
-                        doorButtons[activeButton].Toggle();
+                        doorButtons[activeDoor].Toggle();
                         break;
 
                     case ENTER_KEY:
-                        doorButtons[activeButton].Toggle();
-                        doors[activeButton].Open(50);
-                        return doors[activeButton].Prize;
+                        doorButtons[activeDoor].Toggle();
+                        if (selectedDoor != -1)
+                            doors[selectedDoor].Close(50);
+                        doors[activeDoor].Open(50);
+                        selectedDoor = activeDoor;
+                        return doors[activeDoor].Prize;
                 }
             }
 
