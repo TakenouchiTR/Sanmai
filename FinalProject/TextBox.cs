@@ -19,6 +19,7 @@ namespace FinalProject
 
         int x, y;
         int width, height;
+        int textLine;
         BorderType borderType;
 
         public int Right => x + width - 1;
@@ -30,6 +31,10 @@ namespace FinalProject
             this.width = width;
             this.height = height;
             this.borderType = borderType;
+            textLine = 0;
+
+            WriteText("this is a test, please ignore this message. If this message is too long, it should wrap to the next line. Thank you and have a nice day.");
+            WriteText("-----This should be on a line on its own.");
         }
 
         public void DrawBorder()
@@ -73,10 +78,40 @@ namespace FinalProject
             }
         }
 
-        public void WriteText(string text)
+        public void WriteText(string text, TextAlign align = TextAlign.Left)
         {
-            string[] words = text.Split(" ");
+            string[] words = text.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            StringBuilder line = new StringBuilder();
+            int maxLength = width - 2;
+            int index = 0;
+
+            while (index < words.Length)
+            {
+                if (textLine > height - 2)
+                    return;
+
+                line.Append(words[index++]);
+
+                while (index < words.Length && line.Length + words[index].Length < maxLength)
+                    line.Append(" " + words[index++]);
+
+                Console.CursorTop = y + 1 + textLine;
+                Console.CursorLeft = align == TextAlign.Left ? x + 1 :
+                                     align == TextAlign.Center ? x + width / 2 - line.Length / 2 : Right - line.Length;
+
+                Console.WriteLine(line.ToString());
+
+                line.Clear();
+                textLine++;
+            }
         }
+    }
+
+    public enum TextAlign
+    {
+        Left,
+        Center,
+        Right
     }
 
     public enum BorderType
