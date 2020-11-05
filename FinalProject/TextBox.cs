@@ -32,9 +32,6 @@ namespace FinalProject
             this.height = height;
             this.borderType = borderType;
             textLine = 0;
-
-            WriteText("this is a test, please ignore this message. If this message is too long, it should wrap to the next line. Thank you and have a nice day.");
-            WriteText("-----This should be on a line on its own.");
         }
 
         public void DrawBorder()
