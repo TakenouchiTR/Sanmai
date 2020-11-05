@@ -105,6 +105,22 @@ namespace FinalProject
                 textLine++;
             }
         }
+
+        public void ClearText()
+        {
+            StringBuilder sb = new StringBuilder(width - 2);
+            for (int i = 1; i < width - 1; i++)
+                sb.Append(" ");
+
+            Console.CursorTop = y + 1;
+            for (int i = 1; i < height - 1; i++)
+            {
+                Console.CursorLeft = x + 1;
+                Console.WriteLine(sb.ToString());
+            }
+
+            textLine = 0;
+        }
     }
 
     public enum TextAlign
