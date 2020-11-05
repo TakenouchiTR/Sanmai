@@ -1,36 +1,36 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\scarte22\\source\\repos\\FinalProject\\FinalProject\\FinalProject.csproj": {}
+    "C:\\Users\\TOTak\\Source\\Repos\\FinalProject\\FinalProject\\FinalProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\scarte22\\source\\repos\\FinalProject\\FinalProject\\FinalProject.csproj": {
+    "C:\\Users\\TOTak\\Source\\Repos\\FinalProject\\FinalProject\\FinalProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\scarte22\\source\\repos\\FinalProject\\FinalProject\\FinalProject.csproj",
+        "projectUniqueName": "C:\\Users\\TOTak\\Source\\Repos\\FinalProject\\FinalProject\\FinalProject.csproj",
         "projectName": "FinalProject",
-        "projectPath": "C:\\Users\\scarte22\\source\\repos\\FinalProject\\FinalProject\\FinalProject.csproj",
-        "packagesPath": "C:\\Users\\scarte22\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\scarte22\\source\\repos\\FinalProject\\FinalProject\\obj\\",
+        "projectPath": "C:\\Users\\TOTak\\Source\\Repos\\FinalProject\\FinalProject\\FinalProject.csproj",
+        "packagesPath": "C:\\Users\\TOTak\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\TOTak\\Source\\Repos\\FinalProject\\FinalProject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\scarte22\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\TOTak\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp2.2"
+          "netcoreapp3.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp2.2": {
+          "netcoreapp3.1": {
             "projectReferences": {}
           }
         },
@@ -41,20 +41,23 @@
         }
       },
       "frameworks": {
-        "netcoreapp2.2": {
-          "dependencies": {
-            "Microsoft.NETCore.App": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.2.0, )",
-              "autoReferenced": true
-            }
-          },
+        "netcoreapp3.1": {
           "imports": [
-            "net461"
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
           ],
           "assetTargetFallback": true,
-          "warn": true
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

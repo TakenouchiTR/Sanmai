@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Threading;
 
 namespace FinalProject
@@ -7,8 +8,9 @@ namespace FinalProject
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = Encoding.UTF8;
             int screenWidth = Console.WindowWidth;
-            int padding = 2;
+            int padding = 4;
             int doorCount = 3;
 
             int doorX = screenWidth / 2 - Door.DOOR_WIDTH * doorCount / 2 - padding;
@@ -21,8 +23,19 @@ namespace FinalProject
                 doorX += Door.DOOR_WIDTH + padding;
             }
 
+            doors[0].Prize = Prize.FromFile("Prizes\\Zonk\\dog.txt");
+
             foreach (Door d in doors)
                 d.Draw();
+
+            Console.CursorTop = doors[0].Y + Door.DOOR_HEIGHT + 2;
+
+
+            Console.ReadLine();
+            doors[0].Open(50);
+            
+
+            Console.ReadLine();
         }
     }
 }
