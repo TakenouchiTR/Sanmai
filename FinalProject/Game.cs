@@ -12,6 +12,7 @@ namespace FinalProject
 
         private int activeDoor;
         private int selectedDoor;
+        private TextBox textBox;
         private Door[] doors;
         private Button[] doorButtons;
 
@@ -36,8 +37,10 @@ namespace FinalProject
 
             for (int i = 0; i < doorButtons.Length; i++)
             {
-                doorButtons[i] = new Button("Door #" + (i + 1), i == 0, doors[i].X + Door.DOOR_WIDTH / 2 - 4, doors[i].Bottom + 2);
+                doorButtons[i] = new Button("Door #" + (i + 1), i == 0, doors[i].X + Door.DOOR_WIDTH / 2 - 4, doors[i].Bottom + 4);
             }
+
+            textBox = new TextBox(doors[0].X + 2, doors[0].Bottom + 8, doors[2].Right - doors[0].X - 4, 7, BorderType.DoubleLine);
 
             doors[0].Prize = Prize.FromFile("Prizes\\Middle\\tv.txt");
             doors[1].Prize = Prize.FromFile("Prizes\\Expensive\\truck.txt");
@@ -51,6 +54,7 @@ namespace FinalProject
                 d.Draw();
             foreach (Button b in doorButtons)
                 b.Draw();
+            textBox.DrawBorder();
 
             Prize prize = SelectDoor();
             foreach (Button b in doorButtons)
