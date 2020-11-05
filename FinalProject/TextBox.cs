@@ -78,6 +78,11 @@ namespace FinalProject
         public void WriteText(string text, TextAlign align = TextAlign.Left)
         {
             string[] words = text.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            if (words.Length == 0)
+            {
+                textLine++;
+                return;
+            }
             StringBuilder line = new StringBuilder();
             int maxLength = width - 2;
             int index = 0;
@@ -101,6 +106,11 @@ namespace FinalProject
                 line.Clear();
                 textLine++;
             }
+        }
+
+        public void WriteText()
+        {
+            textLine++;
         }
 
         public void ClearText()
