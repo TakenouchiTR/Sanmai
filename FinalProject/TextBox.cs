@@ -77,6 +77,9 @@ namespace FinalProject
 
         public void WriteText(string text, TextAlign align = TextAlign.Left)
         {
+            if (text == null)
+                return;
+
             string[] words = text.Split(" ", StringSplitOptions.RemoveEmptyEntries);
             if (words.Length == 0)
             {
