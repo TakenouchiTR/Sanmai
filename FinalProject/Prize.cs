@@ -9,6 +9,7 @@ namespace FinalProject
     {
         public const int DISPLAY_WIDTH = 27;
         public const int DISPLAY_HEIGHT = 9;
+        private static Random ran = new Random();
 
         private string[] display;
         private string name;
@@ -70,17 +71,33 @@ namespace FinalProject
 
                 return result;
             }
-            catch 
+            catch
             {
                 return new Prize();
             }
         }
-    }
 
-    public enum PrizeCategory
-    {
-        Expensive,
-        Middle,
-        Zonk
+        public static Prize RandomFromFolder(string folder, PrizeCategory category)
+        {
+            try
+            {
+                string[] files = Directory.GetFiles(folder);
+
+                string file = files[ran.Next(0, files.Length)];
+
+                return FromFile(file, category);
+            }
+            catch
+            {
+                return new Prize();
+            }
+        }
+
+        public enum PrizeCategory
+        {
+            Expensive,
+            Middle,
+            Zonk
+        }
     }
 }

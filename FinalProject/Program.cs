@@ -30,8 +30,18 @@ namespace FinalProject
             Console.CursorVisible = false;
             Console.OutputEncoding = Encoding.UTF8;
 
+            bool playing = true;
             Game game = new Game();
-            while (game.Play());
+
+            game.Setup();
+            
+            while (playing)
+            {
+                playing = game.Play();
+
+                if (playing)
+                    game.Reset();
+            }
         }
     }
 }

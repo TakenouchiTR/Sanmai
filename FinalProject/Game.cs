@@ -9,6 +9,7 @@ namespace FinalProject
         private const ConsoleKey RIGHT_KEY = ConsoleKey.RightArrow;
         private const ConsoleKey LEFT_KEY = ConsoleKey.LeftArrow;
         private const ConsoleKey ENTER_KEY = ConsoleKey.Enter;
+        private static Random ran = new Random();
 
         private int activeDoor;
         private int selectedDoor;
@@ -47,19 +48,36 @@ namespace FinalProject
             yesNoButtons[1] = new Button("No", false, doors[1].Right + 1, doors[0].Bottom + 4);
 
             textBox = new TextBox(doors[0].X + 2, doors[0].Bottom + 8, doors[2].Right - doors[0].X - 4, 7, BorderType.DoubleLine);
+        }
 
-            doors[0].Prize = Prize.FromFile("Prizes\\Middle\\tv.txt", PrizeCategory.Middle);
-            doors[1].Prize = Prize.FromFile("Prizes\\Expensive\\truck.txt", PrizeCategory.Expensive);
-            doors[2].Prize = Prize.FromFile("Prizes\\Zonk\\dog.txt", PrizeCategory.Zonk);
+        public void Setup()
+        {
+            GeneratePrizes();
+
+            //Does an initial render of each item
+            foreach (Door d in doors)
+                d.Draw();
+            textBox.DrawBorder();
+        }
+
+        public void Reset()
+        {
+            GeneratePrizes();
+
+            selectedDoor = -1;
+            activeDoor = 0;
+
+            if (!doorButtons[0].Active)
+                doorButtons[0].Toggle(false);
+            if (doorButtons[1].Active)
+                doorButtons[1].Toggle(false);
+            if (doorButtons[2].Active)
+                doorButtons[2].Toggle(false);
         }
 
         public bool Play()
         {
-            //Does an initial render of each item
-            foreach (Door d in doors)
-                d.Draw();
             ShowButtons(doorButtons);
-            textBox.DrawBorder();
 
             textBox.ClearText();
             textBox.WriteText("Welcome to Let's Make a Deal!", TextAlign.Center);
@@ -143,15 +161,6 @@ namespace FinalProject
                 foreach (Door d in doors)
                     if (!d.Closed)
                         d.Close(25);
-
-                selectedDoor = -1;
-                activeDoor = 0;
-                if (!doorButtons[0].Active)
-                    doorButtons[0].Toggle(false);
-                if (doorButtons[1].Active)
-                    doorButtons[1].Toggle(false);
-                if (doorButtons[2].Active)
-                    doorButtons[2].Toggle(false);
             }
 
             return result;
@@ -234,8 +243,29 @@ namespace FinalProject
                         return result;
                 }
             }
+        }
 
-            return false;
+        private void GeneratePrizes()
+        {
+            Prize[] prizes = new Prize[3];
+            prizes[0] = Prize.RandomFromFolder("Prizes\\Expensive\\", Prize.PrizeCategory.Expensive);
+            prizes[1] = Prize.RandomFromFolder("Prizes\\Middle\\", Prize.PrizeCategory.Middle);
+            prizes[2] = Prize.RandomFromFolder("Prizes\\Zonk\\", Prize.PrizeCategory.Zonk);
+
+            for (int i = 0; i < 10; i++)
+            {
+                int pos1 = ran.Next(0, 3);
+                int pos2 = ran.Next(0, 3);
+
+                Prize temp = prizes[pos1];
+                prizes[pos1] = prizes[pos2];
+                prizes[pos2] = temp;
+            }
+
+            for (int i = 0; i < doors.Length; i++)
+            {
+                doors[i].Prize = prizes[i];
+            }
         }
     }
 }
