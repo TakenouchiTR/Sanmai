@@ -20,15 +20,15 @@ namespace FinalProject
         {
             display = new string[]
             {
-                "       _______             ",
-                "      ╱ ______│            ",
+                "This is a placeholder item ",
                 "                           ",
-                "                         _ ",
-                " ╱                        ╲",
-                " │) _                ___ [│",
-                " │_                       │",
-                "  │ () │                   ",
-                "   ╲__╱             ╲__╱   "
+                "If you are seeing this,    ",
+                "please check your file path",
+                "and make sure that it is   ",
+                "written correctly.         ",
+                "                           ",
+                "And that you actually have ",
+                "it set to copy the file.   "
             };
         }
 
@@ -44,7 +44,7 @@ namespace FinalProject
             }
         }
 
-        public static Prize FromFile(string file)
+        public static Prize FromFile(string file, PrizeCategory category)
         {
             try
             {
@@ -60,6 +60,7 @@ namespace FinalProject
                     result.name = reader.ReadLine();
                     result.description = reader.ReadLine();
                     result.price = reader.ReadLine();
+                    result.category = category;
                 }
 
                 return result;
@@ -74,7 +75,7 @@ namespace FinalProject
     public enum PrizeCategory
     {
         Expensive,
-        Medium,
+        Middle,
         Zonk
     }
 }
