@@ -46,6 +46,7 @@ namespace FinalProject
             for (int i = 0; i < DISPLAY_HEIGHT; i++)
             {
                 Console.CursorLeft = xPos;
+                int length = display[i].Length;
                 Console.WriteLine(display[i].Substring(DISPLAY_WIDTH / 2 - width / 2, width));
             }
         }
@@ -58,9 +59,16 @@ namespace FinalProject
                 using (StreamReader reader = new StreamReader(file))
                 {
                     result.display = new string[DISPLAY_HEIGHT];
+                    StringBuilder line = new StringBuilder();
                     for (int i = 0; i < DISPLAY_HEIGHT; i++)
                     {
-                        result.display[i] = reader.ReadLine();
+                        line.Append(reader.ReadLine());
+
+                        while (line.Length < DISPLAY_WIDTH)
+                            line.Append(' ');
+
+                        result.display[i] = line.ToString().Substring(0, DISPLAY_WIDTH);
+                        line.Clear();
                     }
 
                     result.name = reader.ReadLine();
