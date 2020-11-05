@@ -6,8 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="Prizes\Expensive\truck.txt">
+    <None Update="Prizes\Expensive\computer.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Prizes\Expensive\truck.txt">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="Prizes\Middle\tv.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
