@@ -82,8 +82,9 @@ namespace FinalProject
             textBox.ClearText();
             textBox.WriteText("Welcome to Let's Make a Deal!", TextAlign.Center);
             textBox.WriteText("--------------------", TextAlign.Center);
-            textBox.WriteText("Please use the left and right arrow keys to select a door. Once you've chosen a door that you like, " + 
-                "press Enter to open it. If you don't like what you got, you'll be given a chance to pick another door!");
+            textBox.WriteText("Please use the left and right arrow keys to select a door. " +
+                "Once you've chosen a door that you like, press Enter to open it. " +
+                "If you don't like what you got, you'll be given a chance to pick another door!");
 
             Prize prize = SelectDoor();
 
@@ -196,7 +197,7 @@ namespace FinalProject
                         doorButtons[activeDoor].Toggle();
                         if (selectedDoor != -1)
                             doors[selectedDoor].Close(50);
-                        doors[activeDoor].Open(50);
+                        doors[activeDoor].RandomOpen(50);
                         selectedDoor = activeDoor;
                         return doors[activeDoor].Prize;
                 }

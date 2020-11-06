@@ -12,6 +12,12 @@ namespace FinalProject
         private const string DOOR_TOP =    "_____________________________";
         private const string DOOR_BODY =   "│                           │";
         private const string DOOR_BOTTOM = "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾";
+        private static readonly int[] SLOW_OPEN = new int[]
+        {
+            50, 50, 50, -1000, -750, -750, 2000, 25, 25, 25, 
+            25, 25, 25, 25, 25, 25, 25, 25, 25, 25
+        };
+        private static Random ran = new Random();
 
         private int x, y;
         private int frame;
@@ -48,6 +54,26 @@ namespace FinalProject
                 Frame++;
                 Draw();
             }
+        }
+
+        public void RandomOpen(int speed)
+        {
+            if (ran.Next(5) == 0)
+            {
+                foreach (int i in SLOW_OPEN)
+                {
+                    Thread.Sleep(Math.Abs(i));
+
+                    if (i > 0)
+                        frame++;
+                    else
+                        frame--;
+
+                    Draw();
+                }
+            }
+            else
+                Open(speed);
         }
 
         public void Close(int speed)
