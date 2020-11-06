@@ -40,6 +40,9 @@ namespace FinalProject
 
         public void Draw(int x, int y, int width)
         {
+            ConsoleColor oldColor = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.White;
+
             int xPos = x + DISPLAY_WIDTH / 2 - width / 2 + 1;
 
             Console.CursorTop = y;
@@ -49,6 +52,8 @@ namespace FinalProject
                 int length = display[i].Length;
                 Console.WriteLine(display[i].Substring(DISPLAY_WIDTH / 2 - width / 2, width));
             }
+
+            Console.ForegroundColor = oldColor;
         }
 
         public static Prize FromFile(string file, PrizeCategory category)
