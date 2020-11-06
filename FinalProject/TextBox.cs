@@ -37,6 +37,9 @@ namespace FinalProject
 
         public void DrawBorder()
         {
+            ConsoleColor oldColor = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.White;
+
             char[] borderSet = BORDER_PIECES[(int)borderType];
 
             //Top Edge
@@ -74,12 +77,17 @@ namespace FinalProject
                 Console.CursorLeft = Right;
                 Console.WriteLine(borderSet[(int)BorderPiece.Vertical]);
             }
+
+            Console.ForegroundColor = oldColor;
         }
 
         public void WriteText(string text, TextAlign align = TextAlign.Left, int writeTime = 0)
         {
             if (text == null)
                 return;
+
+            ConsoleColor oldColor = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.White;
 
             string[] words = text.Split(" ", StringSplitOptions.RemoveEmptyEntries);
             if (words.Length == 0)
@@ -120,6 +128,8 @@ namespace FinalProject
                 line.Clear();
                 textLine++;
             }
+
+            Console.ForegroundColor = oldColor;
         }
 
         public void WriteText()

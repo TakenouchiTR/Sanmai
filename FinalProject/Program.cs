@@ -29,6 +29,7 @@ namespace FinalProject
 
             Console.CursorVisible = false;
             Console.OutputEncoding = Encoding.UTF8;
+            Console.ForegroundColor = ConsoleColor.Black;
 
             bool playing = true;
             Game game = new Game();

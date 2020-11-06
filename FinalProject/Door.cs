@@ -113,6 +113,9 @@ namespace FinalProject
 
         private void DrawBase() 
         {
+            ConsoleColor oldColor = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.White;
+
             Console.CursorTop = Y;
             if (drawTop)
             {
@@ -132,6 +135,8 @@ namespace FinalProject
                 Console.CursorLeft = X;
                 Console.WriteLine(DOOR_BOTTOM);
             }
+
+            Console.ForegroundColor = oldColor;
         }
 
         private void DrawPrize()
@@ -261,6 +266,9 @@ namespace FinalProject
             if (xPos <= X)
                 return;
 
+            ConsoleColor oldColor = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.White;
+
             Console.CursorTop = Y;
             for (int i = 0; i < DOOR_HEIGHT; i++)
             {
@@ -282,6 +290,8 @@ namespace FinalProject
                     Console.WriteLine('┃');
                 }
             }
+
+            Console.ForegroundColor = oldColor;
         }
 
     }
