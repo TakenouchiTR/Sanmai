@@ -169,6 +169,8 @@ namespace FinalProject
 
         private Prize SelectDoor()
         {
+            int xPos = Console.CursorLeft;
+
             while (true)
             {
                 switch (Console.ReadKey().Key)
@@ -200,6 +202,10 @@ namespace FinalProject
                         doors[activeDoor].RandomOpen(50);
                         selectedDoor = activeDoor;
                         return doors[activeDoor].Prize;
+
+                    default:
+                        Console.CursorLeft = xPos;
+                        break;
                 }
             }
         }
@@ -228,6 +234,8 @@ namespace FinalProject
 
         private bool GetYesNo()
         {
+            int xPos = Console.CursorLeft;
+
             while (true)
             {
                 switch (Console.ReadKey().Key)
@@ -242,6 +250,10 @@ namespace FinalProject
                     case ENTER_KEY:
                         bool result = selectedYesNo == 0;
                         return result;
+
+                    default:
+                        Console.CursorLeft = xPos;
+                        break;
                 }
             }
         }
