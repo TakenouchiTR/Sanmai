@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace FinalProject
 {
@@ -75,7 +76,7 @@ namespace FinalProject
             }
         }
 
-        public void WriteText(string text, TextAlign align = TextAlign.Left)
+        public void WriteText(string text, TextAlign align = TextAlign.Left, int writeTime = 0)
         {
             if (text == null)
                 return;
@@ -104,7 +105,17 @@ namespace FinalProject
                 Console.CursorLeft = align == TextAlign.Left ? x + 1 :
                                      align == TextAlign.Center ? x + width / 2 - line.Length / 2 : Right - line.Length;
 
-                Console.WriteLine(line.ToString());
+                if (writeTime == 0)
+                    Console.WriteLine(line.ToString());
+                else
+                {
+                    foreach (char c in line.ToString())
+                    {
+                        Console.Write(c);
+                        Thread.Sleep(writeTime);
+                    }
+                    Console.WriteLine();
+                }
 
                 line.Clear();
                 textLine++;
