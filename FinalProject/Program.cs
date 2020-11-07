@@ -7,7 +7,8 @@ namespace FinalProject
 {
     class Program
     {
-        //Code for preventing resizing, from https://stackoverflow.com/questions/32062219/c-sharp-is-there-a-way-to-make-a-fixed-height-width-console
+        //Code for preventing resizing, shamelessly taken from 
+        //  https://stackoverflow.com/questions/32062219/c-sharp-is-there-a-way-to-make-a-fixed-height-width-console
         const int MF_BYCOMMAND = 0x00000000;
         const int SC_MAXIMIZE = 0xF030;
         const int SC_SIZE = 0xF000;

@@ -7,21 +7,35 @@ namespace FinalProject
 {
     public class Prize
     {
+        #region Constants
         public const int DISPLAY_WIDTH = 27;
         public const int DISPLAY_HEIGHT = 9;
-        private static Random ran = new Random();
+        #endregion
 
+        #region Class Fields
+        private static Random ran = new Random();
+        #endregion
+
+        #region Fields
         private string[] display;
         private string name;
         private string description;
         private string price;
         private PrizeCategory category;
+        #endregion
 
+        #region Properties
         public string Name => name;
         public string Description => description;
         public string Price => price;
         public PrizeCategory Category => category;
+        #endregion
 
+        #region Constructors
+        /// <summary>
+        /// Creates a dummy Prize.
+        /// The constructor should not be used outside of testing purposes.
+        /// </summary>
         public Prize()
         {
             display = new string[]
@@ -37,25 +51,15 @@ namespace FinalProject
                 "it set to copy the file.   "
             };
         }
+        #endregion
 
-        public void Draw(int x, int y, int width)
-        {
-            ConsoleColor oldColor = Console.ForegroundColor;
-            Console.ForegroundColor = ConsoleColor.White;
-
-            int xPos = x + DISPLAY_WIDTH / 2 - width / 2 + 1;
-
-            Console.CursorTop = y;
-            for (int i = 0; i < DISPLAY_HEIGHT; i++)
-            {
-                Console.CursorLeft = xPos;
-                int length = display[i].Length;
-                Console.WriteLine(display[i].Substring(DISPLAY_WIDTH / 2 - width / 2, width));
-            }
-
-            Console.ForegroundColor = oldColor;
-        }
-
+        #region Factory Methods
+        /// <summary>
+        /// Loads a Prize from a file.
+        /// </summary>
+        /// <param name="file">Path to the prize file</param>
+        /// <param name="category">Category of the prize</param>
+        /// <returns>Prize generated from the file if successful; default prize if unsuccessful</returns>
         public static Prize FromFile(string file, PrizeCategory category)
         {
             try
@@ -90,6 +94,12 @@ namespace FinalProject
             }
         }
 
+        /// <summary>
+        /// Loads a Prize from a random file in a folder.
+        /// </summary>
+        /// <param name="folder">Folder ONLY containing the prize files.</param>
+        /// <param name="category">Category of the prize</param>
+        /// <returns>Prize generated from the file if successful; default prize if unsuccessful</returns>
         public static Prize RandomFromFolder(string folder, PrizeCategory category)
         {
             try
@@ -105,12 +115,43 @@ namespace FinalProject
                 return new Prize();
             }
         }
+        #endregion
 
-        public enum PrizeCategory
+        #region Draw Method
+        /// <summary>
+        /// Draws the prize at a location with a certain width.
+        /// The image will draw from the center to match how doors open.
+        /// </summary>
+        /// <param name="x">Left-edge of the image</param>
+        /// <param name="y">Top-edge of the image</param>
+        /// <param name="width">Number of the center columns to draw</param>
+        public void Draw(int x, int y, int width)
         {
-            Expensive,
-            Middle,
-            Zonk
+            //Saves the cursor position and color so that it can be reset later
+            ConsoleColor oldColor = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.White;
+
+            int xPos = x + DISPLAY_WIDTH / 2 - width / 2 + 1;
+
+            Console.CursorTop = y;
+            for (int i = 0; i < DISPLAY_HEIGHT; i++)
+            {
+                Console.CursorLeft = xPos;
+                int length = display[i].Length;
+                Console.WriteLine(display[i].Substring(DISPLAY_WIDTH / 2 - width / 2, width));
+            }
+
+            Console.ForegroundColor = oldColor;
         }
+        #endregion
     }
+
+    #region Enums
+    public enum PrizeCategory
+    {
+        Expensive,
+        Middle,
+        Zonk
+    }
+    #endregion
 }
