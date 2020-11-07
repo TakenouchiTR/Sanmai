@@ -65,7 +65,7 @@ namespace FinalProject
             //Corners
             Painter.Write(borderSet[(int)BorderPiece.TopLeft], x, y, ConsoleColor.White);
             Painter.Write(borderSet[(int)BorderPiece.TopRight], Right, y, ConsoleColor.White);
-            Painter.Write(borderSet[(int)BorderPiece.TopRight], Right, Bottom, ConsoleColor.White);
+            Painter.Write(borderSet[(int)BorderPiece.BottomRight], Right, Bottom, ConsoleColor.White);
             Painter.Write(borderSet[(int)BorderPiece.BottomLeft], x, Bottom, ConsoleColor.White);
 
             //Top and Bottom Edges
