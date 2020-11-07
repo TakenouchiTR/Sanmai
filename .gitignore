@@ -3,9 +3,6 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-#Prize Files
-!Prizes/
-
 # User-specific files
 *.rsuser
 *.suo
@@ -17,7 +14,6 @@
 *.userprefs
 
 # Build results
-FinalProject
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
