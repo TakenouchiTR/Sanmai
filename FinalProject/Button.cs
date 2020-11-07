@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace FinalProject
 {
@@ -57,9 +59,17 @@ namespace FinalProject
         /// </summary>
         public void Draw()
         {
-            ConsoleColor backColor = Active ? ACTIVE_COLOR : INACTIVE_COLOR;
+            ConsoleColor oldBackColor = Console.BackgroundColor;
+            ConsoleColor oldFrontColor = Console.ForegroundColor;
 
-            Painter.Write(" " + text + " ", x, y, ConsoleColor.Black, backColor);
+            Console.BackgroundColor = Active ? ACTIVE_COLOR : INACTIVE_COLOR;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.CursorLeft = x;
+            Console.CursorTop = y;
+            Console.Write(" " + text + " ");
+
+            Console.BackgroundColor = oldBackColor;
+            Console.ForegroundColor = oldFrontColor;
         }
 
         /// <summary>
@@ -67,8 +77,19 @@ namespace FinalProject
         /// </summary>
         public void Hide()
         {
+            ConsoleColor oldBackColor = Console.BackgroundColor;
+            ConsoleColor oldFrontColor = Console.ForegroundColor;
+
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.CursorLeft = x;
+            Console.CursorTop = y;
+
             for (int i = 0; i < text.Length + 2; i++)
-                Painter.Write(" ", x + i, y);
+                Console.Write(" ");
+
+            Console.BackgroundColor = oldBackColor;
+            Console.ForegroundColor = oldFrontColor;
         }
         #endregion
     }

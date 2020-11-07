@@ -29,7 +29,6 @@ namespace FinalProject
 
         #region Properties
         public int Right => x + width - 1;
-        public int Bottom => y + height - 1;
         #endregion
 
         #region Constructors
@@ -60,27 +59,48 @@ namespace FinalProject
         /// </summary>
         public void DrawBorder()
         {
+            ConsoleColor oldColor = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.White;
+
             char[] borderSet = BORDER_PIECES[(int)borderType];
 
-            //Corners
-            Painter.Write(borderSet[(int)BorderPiece.TopLeft], x, y, ConsoleColor.White);
-            Painter.Write(borderSet[(int)BorderPiece.TopRight], Right, y, ConsoleColor.White);
-            Painter.Write(borderSet[(int)BorderPiece.TopRight], Right, Bottom, ConsoleColor.White);
-            Painter.Write(borderSet[(int)BorderPiece.BottomLeft], x, Bottom, ConsoleColor.White);
+            //Top Edge
+            Console.CursorLeft = x;
+            Console.CursorTop = y;
 
-            //Top and Bottom Edges
-            for (int i = x + 1; i < Right; i++)
+            Console.Write(borderSet[(int)BorderPiece.TopLeft]);
+            for (int i = 1; i < width - 1; i++)
+                Console.Write(borderSet[(int)BorderPiece.Horizontal]);
+            Console.Write(borderSet[(int)BorderPiece.TopRight]);
+
+            //Bottom Edge
+            Console.CursorLeft = x;
+            Console.CursorTop = y + height - 1;
+
+            Console.Write(borderSet[(int)BorderPiece.BottomLeft]);
+            for (int i = 1; i < width - 1; i++)
+                Console.Write(borderSet[(int)BorderPiece.Horizontal]);
+            Console.Write(borderSet[(int)BorderPiece.BottomRight]);
+
+            //Left Edge
+            Console.CursorTop = y + 1;
+
+            for (int i = 1; i < height - 1; i++)
             {
-                Painter.Write(borderSet[(int)BorderPiece.Horizontal], i, y, ConsoleColor.White);
-                Painter.Write(borderSet[(int)BorderPiece.Horizontal], i, Bottom, ConsoleColor.White);
+                Console.CursorLeft = x;
+                Console.WriteLine(borderSet[(int)BorderPiece.Vertical]);
             }
 
-            //Left and Right Edges
-            for (int i = y + 1; i < Bottom; i++)
+            //Right Edge
+            Console.CursorTop = y + 1;
+
+            for (int i = 1; i < height - 1; i++)
             {
-                Painter.Write(borderSet[(int)BorderPiece.Vertical], x, i, ConsoleColor.White);
-                Painter.Write(borderSet[(int)BorderPiece.Vertical], Right, i, ConsoleColor.White);
+                Console.CursorLeft = Right;
+                Console.WriteLine(borderSet[(int)BorderPiece.Vertical]);
             }
+
+            Console.ForegroundColor = oldColor;
         }
 
         /// <summary>
@@ -96,6 +116,10 @@ namespace FinalProject
             //Instantly returns if the text is null
             if (text == null)
                 return;
+
+            //Saves the cursor position and color so that it can be reset later
+            ConsoleColor oldColor = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.White;
 
             //Splits the text into words, and skips to the next line if there is nothing to display
             string[] words = text.Split(" ", StringSplitOptions.RemoveEmptyEntries);
@@ -121,26 +145,28 @@ namespace FinalProject
                     line.Append(" " + words[index++]);
 
                 //Positions the text depending on text alignment
-                int yPos = y + 1 + textLine;
-                int xPos = align == TextAlign.Left ? x + 1 :
-                           align == TextAlign.Center ? x + width / 2 - line.Length / 2 : 
-                           Right - line.Length;
+                Console.CursorTop = y + 1 + textLine;
+                Console.CursorLeft = align == TextAlign.Left ? x + 1 :
+                                     align == TextAlign.Center ? x + width / 2 - line.Length / 2 : Right - line.Length;
 
                 //Writes the text to the screen
                 if (writeTime == 0)
-                    Painter.Write(line.ToString(), xPos, yPos, ConsoleColor.White);
+                    Console.WriteLine(line.ToString());
                 else
                 {
                     foreach (char c in line.ToString())
                     {
-                        Painter.Write(c, xPos++, yPos, ConsoleColor.White);
+                        Console.Write(c);
                         Thread.Sleep(writeTime);
                     }
+                    Console.WriteLine();
                 }
 
                 line.Clear();
                 textLine++;
             }
+
+            Console.ForegroundColor = oldColor;
         }
 
         /// <summary>
@@ -160,8 +186,12 @@ namespace FinalProject
             for (int i = 1; i < width - 1; i++)
                 sb.Append(" ");
 
-            for (int i = y + 1; i < Bottom; i++)
-                Painter.Write(sb.ToString(), x + 1, i);
+            Console.CursorTop = y + 1;
+            for (int i = 1; i < height - 1; i++)
+            {
+                Console.CursorLeft = x + 1;
+                Console.WriteLine(sb.ToString());
+            }
 
             textLine = 0;
         }

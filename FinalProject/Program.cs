@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 
 namespace FinalProject
 {
@@ -29,7 +30,7 @@ namespace FinalProject
 
             Console.CursorVisible = false;
             Console.OutputEncoding = Encoding.UTF8;
-            Painter.DefaultFrontColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.Black;
 
             bool playing = true;
             Game game = new Game();

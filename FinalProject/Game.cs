@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 
 namespace FinalProject
 {
@@ -167,16 +166,9 @@ namespace FinalProject
             if (GetYesNo())
             {
                 //---Show other prizes---//
-                Thread[] threads = new Thread[doors.Length];
-                for (int i = 0; i < doors.Length; i++)
-                {
-                    int index = i;
-                    threads[index] = new Thread(() => doors[index].Open(25));
-                    threads[index].Start();
-                }
-
-                foreach (Thread t in threads)
-                    t.Join();
+                foreach (Door d in doors)
+                    if (d.Closed)
+                        d.Open(25);
 
                 textBox.ClearText();
                 textBox.WriteText();
@@ -202,16 +194,9 @@ namespace FinalProject
 
             if (result)
             {
-                Thread[] threads = new Thread[doors.Length];
-                for (int i = 0; i < doors.Length; i++)
-                {
-                    int index = i;
-                    threads[index] = new Thread(() => doors[index].Close(25));
-                    threads[index].Start();
-                }
-
-                foreach (Thread t in threads)
-                    t.Join();
+                foreach (Door d in doors)
+                    if (!d.Closed)
+                        d.Close(25);
             }
 
             return result;
