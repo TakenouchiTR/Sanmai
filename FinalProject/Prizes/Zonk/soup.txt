@@ -1,0 +1,12 @@
+﻿
+    .-"""-.
+    |`-.-'|
+    |     |
+ .-"|     |""-.
+ |`-.`-.-'-.-'|
+ |     ||     |
+ |     ||     |
+  `-.-'  `-.-'
+three cans of soup
+None of these cans have any sort of label. Their contents will be a mystery until opened.
+$2.97

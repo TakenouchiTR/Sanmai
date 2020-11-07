@@ -127,21 +127,14 @@ namespace FinalProject
         /// <param name="width">Number of the center columns to draw</param>
         public void Draw(int x, int y, int width)
         {
-            //Saves the cursor position and color so that it can be reset later
-            ConsoleColor oldColor = Console.ForegroundColor;
-            Console.ForegroundColor = ConsoleColor.White;
-
             int xPos = x + DISPLAY_WIDTH / 2 - width / 2 + 1;
 
             Console.CursorTop = y;
             for (int i = 0; i < DISPLAY_HEIGHT; i++)
             {
-                Console.CursorLeft = xPos;
                 int length = display[i].Length;
-                Console.WriteLine(display[i].Substring(DISPLAY_WIDTH / 2 - width / 2, width));
+                Painter.Write(display[i].Substring(DISPLAY_WIDTH / 2 - width / 2, width), xPos, y + i, ConsoleColor.White);
             }
-
-            Console.ForegroundColor = oldColor;
         }
         #endregion
     }

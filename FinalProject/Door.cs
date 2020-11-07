@@ -37,7 +37,7 @@ namespace FinalProject
         public int X { get => x; set => x = value; }
         public int Y { get => y; set => y = value; }
         public int Right => X + DOOR_WIDTH - 1;
-        public int Bottom => Y + DOOR_HEIGHT;
+        public int Bottom => Y + DOOR_HEIGHT - 1;
         public int Number { get => number; set => number = value; }
         public int Frame { get => frame; set => frame = value; }
         public bool Closed => Frame == 0;
@@ -70,7 +70,7 @@ namespace FinalProject
         /// <param name="speed">Time in milliseconds between frames</param>
         public void Open(int speed)
         {
-            for (int i = 0; i < 14; i++)
+            while (Frame < DOOR_WIDTH / 2)
             {
                 Thread.Sleep(speed);
                 Frame++;
@@ -108,7 +108,7 @@ namespace FinalProject
         /// <param name="speed">Time in milliseconds between frames</param>
         public void Close(int speed)
         {
-            for (int i = 0; i < 14; i++)
+            while (Frame > 0)
             {
                 Thread.Sleep(speed);
                 Frame--;
@@ -123,11 +123,6 @@ namespace FinalProject
         /// </summary>
         public void Draw()
         {
-            //Saves the cursor position and color so that it can be reset later
-            ConsoleColor oldColor = Console.BackgroundColor;
-            int cursorX = Console.CursorLeft;
-            int cursorY = Console.CursorTop;
-
             DrawBase();
 
             DrawPrize();
@@ -139,11 +134,6 @@ namespace FinalProject
             DrawRightTriangle(Right - DOOR_HEIGHT / 2 - 3 + Frame, ConsoleColor.Yellow);
 
             DrawInnerDoor();
-
-            //Resets the cursor position and color 
-            Console.CursorLeft = cursorX;
-            Console.CursorTop = cursorY;
-            Console.BackgroundColor = oldColor;
         }
 
         /// <summary>
@@ -151,34 +141,20 @@ namespace FinalProject
         /// </summary>
         private void DrawBase() 
         {
-            //Saves the console's color so that it can be reset when finished
-            ConsoleColor oldColor = Console.ForegroundColor;
-            Console.ForegroundColor = ConsoleColor.White;
-
             //Top edge
-            Console.CursorTop = Y;
             if (drawTop)
-            {
-                Console.CursorTop--;
-                Console.CursorLeft = X;
-                Console.WriteLine(DOOR_TOP);
-            }
+                Painter.Write(DOOR_TOP, x, Y - 1, ConsoleColor.White);
 
             //Center
             for (int i = 0; i < DOOR_HEIGHT; i++)
             {
                 Console.CursorLeft = X;
-                Console.WriteLine(DOOR_BODY);
+                Painter.Write(DOOR_BODY, X, Y + i, ConsoleColor.White);
             }
 
             //Bottom edge
             if (drawBottom)
-            {
-                Console.CursorLeft = X;
-                Console.WriteLine(DOOR_BOTTOM);
-            }
-
-            Console.ForegroundColor = oldColor;
+                Painter.Write(DOOR_BOTTOM, x, Bottom + 1, ConsoleColor.White);
         }
 
         /// <summary>
@@ -202,32 +178,22 @@ namespace FinalProject
             if (leftBound + DOOR_HEIGHT / 2 + 2 <= X)
                 return;
 
-            //Saves the console's color so that it can be reset when finished
-            ConsoleColor oldColor = Console.ForegroundColor;
-            Console.ForegroundColor = color;
-
             //Top slope
             int xPos = leftBound + DOOR_HEIGHT / 2;
             int yPos = Y;
 
             for (int i = 0; i < DOOR_HEIGHT / 2; i++)
             {
-                Console.CursorLeft = xPos;
-                Console.CursorTop = yPos;
-
                 if (xPos > X)
-                    Console.Write('╱');
+                    Painter.Write('╱', xPos, yPos, color);
 
                 xPos--;
                 yPos++;
             }
 
             //Point
-            Console.CursorLeft = xPos;
-            Console.CursorTop = yPos;
-
             if (xPos > X)
-                Console.Write('<');
+                Painter.Write('<', xPos, yPos, color);
 
             xPos++;
             yPos++;
@@ -235,28 +201,21 @@ namespace FinalProject
             //Bottom Slope
             for (int i = 0; i < DOOR_HEIGHT / 2; i++)
             {
-                Console.CursorLeft = xPos;
-                Console.CursorTop = yPos;
-
                 if (xPos > X)
-                    Console.Write('╲');
+                    Painter.Write('╲', xPos, yPos, color);
 
                 xPos++;
                 yPos++;
             }
 
             //Right edge
-            Console.CursorTop = Y;
             if (xPos > X)
             {
                 for (int i = 0; i < DOOR_HEIGHT; i++)
                 {
-                    Console.CursorLeft = xPos;
-                    Console.WriteLine('│');
+                    Painter.Write('│', xPos, Y + i, color);
                 }
             }
-
-            Console.ForegroundColor = oldColor;
         }
 
         /// <summary>
@@ -270,32 +229,22 @@ namespace FinalProject
             if (rightBound - DOOR_HEIGHT / 2 - 2 >= Right)
                 return;
 
-            //Saves the console's color so that it can be reset when finished
-            ConsoleColor oldColor = Console.ForegroundColor;
-            Console.ForegroundColor = color;
-
             //Top slope
             int xPos = rightBound - DOOR_HEIGHT / 2;
             int yPos = Y;
 
             for (int i = 0; i < DOOR_HEIGHT / 2; i++)
             {
-                Console.CursorLeft = xPos;
-                Console.CursorTop = yPos;
-
                 if (xPos < Right)
-                    Console.Write('╲');
+                    Painter.Write('╲', xPos, yPos, color);
 
                 xPos++;
                 yPos++;
             }
 
             //Point
-            Console.CursorLeft = xPos;
-            Console.CursorTop = yPos;
-
             if (xPos < Right)
-                Console.Write('>');
+                Painter.Write('>', xPos, yPos, color);
 
             xPos--;
             yPos++;
@@ -303,28 +252,21 @@ namespace FinalProject
             //Bottom slope
             for (int i = 0; i < DOOR_HEIGHT / 2; i++)
             {
-                Console.CursorLeft = xPos;
-                Console.CursorTop = yPos;
-
                 if (xPos < Right)
-                    Console.Write('╱');
+                    Painter.Write('╱', xPos, yPos, color);
 
                 xPos--;
                 yPos++;
             }
 
             //Left edge
-            Console.CursorTop = Y;
             if (xPos < Right)
             {
                 for (int i = 0; i < DOOR_HEIGHT; i++)
                 {
-                    Console.CursorLeft = xPos;
-                    Console.WriteLine('│');
+                    Painter.Write('│', xPos, Y + i, color);
                 }
             }
-
-            Console.ForegroundColor = oldColor;
         }
 
         /// <summary>
@@ -337,36 +279,20 @@ namespace FinalProject
             if (xPos <= X)
                 return;
 
-            //Saves the console's color so that it can be reset when finished
-            ConsoleColor oldColor = Console.ForegroundColor;
-            Console.ForegroundColor = ConsoleColor.White;
-
             //Left door's edge
-            Console.CursorTop = Y;
             for (int i = 0; i < DOOR_HEIGHT; i++)
-            {
-                Console.CursorLeft = xPos;
-                Console.WriteLine('┃');
-            }
+                Painter.Write('│', xPos, Y + i, ConsoleColor.White);
 
             //Number
-            Console.CursorTop = Y + DOOR_HEIGHT / 2;
-            Console.CursorLeft = xPos;
-            Console.WriteLine(Number);
+            Painter.Write(Number.ToString(), xPos, Y + DOOR_HEIGHT / 2, ConsoleColor.White);
 
             //Only draws the right door's edge if the door isn't closed
             if (Frame > 0)
             {
                 xPos += frame * 2;
-                Console.CursorTop = Y;
                 for (int i = 0; i < DOOR_HEIGHT; i++)
-                {
-                    Console.CursorLeft = xPos;
-                    Console.WriteLine('┃');
-                }
+                    Painter.Write('│', xPos, Y + i, ConsoleColor.White);
             }
-
-            Console.ForegroundColor = oldColor;
         }
         #endregion
     }
