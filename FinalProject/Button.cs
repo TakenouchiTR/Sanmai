@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace FinalProject
 {
@@ -13,6 +14,7 @@ namespace FinalProject
         private bool active;
         private string text;
         private int x, y;
+        private string hideString;
         #endregion
 
         #region Properties
@@ -34,6 +36,11 @@ namespace FinalProject
             this.active = active;
             this.x = x;
             this.y = y;
+
+            StringBuilder sb = new StringBuilder(text.Length + 2);
+            for (int i = 0; i < text.Length + 2; i++)
+                sb.Append(" ");
+            hideString = sb.ToString();
         }
         #endregion
 
@@ -67,8 +74,7 @@ namespace FinalProject
         /// </summary>
         public void Hide()
         {
-            for (int i = 0; i < text.Length + 2; i++)
-                Painter.Write(" ", x + i, y);
+            Painter.Write(hideString, x, y);
         }
         #endregion
     }

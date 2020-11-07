@@ -132,11 +132,10 @@ namespace FinalProject
         {
             int xPos = x + DISPLAY_WIDTH / 2 - width / 2 + 1;
 
-            Console.CursorTop = y;
             for (int i = 0; i < DISPLAY_HEIGHT; i++)
             {
-                int length = display[i].Length;
-                Painter.Write(display[i].Substring(DISPLAY_WIDTH / 2 - width / 2, width), xPos, y + i, ConsoleColor.White);
+                string substring = display[i].Substring(DISPLAY_WIDTH / 2 - width / 2, width);
+                Painter.Write(substring, xPos, y + i, ConsoleColor.White);
             }
         }
         #endregion
