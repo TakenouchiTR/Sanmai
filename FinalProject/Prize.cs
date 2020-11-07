@@ -96,15 +96,18 @@ namespace FinalProject
 
         /// <summary>
         /// Loads a Prize from a random file in a folder.
+        /// Prize files must have the extension .prz.
         /// </summary>
-        /// <param name="folder">Folder ONLY containing the prize files.</param>
+        /// <param name="folder">Folder cotaining .prz files.</param>
         /// <param name="category">Category of the prize</param>
         /// <returns>Prize generated from the file if successful; default prize if unsuccessful</returns>
         public static Prize RandomFromFolder(string folder, PrizeCategory category)
         {
             try
             {
-                string[] files = Directory.GetFiles(folder);
+                string[] files = Directory.GetFiles(folder, "*.prz");
+                if (files.Length == 0)
+                    return new Prize();
 
                 string file = files[ran.Next(0, files.Length)];
 

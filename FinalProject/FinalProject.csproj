@@ -9,25 +9,25 @@
     <None Update="Prizes\Expensive\computer.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Prizes\Expensive\truck.txt">
+    <None Update="Prizes\Expensive\20.prz">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Prizes\Expensive\workstation.txt">
+    <None Update="Prizes\Expensive\21.prz">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Prizes\Middle\laptop.txt">
+    <None Update="Prizes\Middle\10.prz">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Prizes\Middle\tv.txt">
+    <None Update="Prizes\Middle\11.prz">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Prizes\Zonk\dog.txt">
+    <None Update="Prizes\Zonk\0.prz">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Prizes\Zonk\exercise_ball.txt">
+    <None Update="Prizes\Zonk\1.prz">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Prizes\Zonk\soup.txt">
+    <None Update="Prizes\Zonk\2.prz">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
