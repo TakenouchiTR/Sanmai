@@ -36,8 +36,17 @@ namespace FinalProject
             Console.OutputEncoding = Encoding.UTF8;
             Painter.DefaultFrontColor = ConsoleColor.Black;
 
+            Collection.LoadCollectionFile("collection.txt");
+            for (int i = 0; i < Collection.Count; i++)
+                Collection.Prizes[i] = Prize.FromFile("Prizes\\Zonk\\0.prz", PrizeCategory.Zonk, 0);
+
+            Collection.LoadPrizeFolder("Prizes\\Zonk\\", PrizeCategory.Zonk);
+            Collection.LoadPrizeFolder("Prizes\\Middle\\", PrizeCategory.Middle);
+            Collection.LoadPrizeFolder("Prizes\\Expensive\\", PrizeCategory.Expensive);
+
             bool playing = true;
             Game game = new Game();
+            CollectionScreen collectionScreen = new CollectionScreen();
 
             game.Setup();
             
@@ -48,6 +57,13 @@ namespace FinalProject
                 if (playing)
                     game.Reset();
             }
+
+            game.Hide();
+
+            collectionScreen.Startup();
+            collectionScreen.Play();
+
+            Collection.WriteToFile("collection.txt");
         }
     }
 }

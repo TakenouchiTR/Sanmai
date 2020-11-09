@@ -18,6 +18,23 @@ namespace FinalProject
 
         public static bool[] PrizeStatus => prizeStatus;
         public static Prize[] Prizes => prizes;
+        public static int Count => prizes != null ? prizes.Length : 0;
+
+        public static void LoadPrizeFolder(string folder, PrizeCategory category)
+        {
+            string[] files = Directory.GetFiles(folder, "*.prz");
+            if (files.Length == 0)
+                return;
+
+            foreach (string file in files)
+            {
+                string fileName = Path.GetFileNameWithoutExtension(file);
+                int id = int.Parse(fileName);
+                Prize prize = Prize.FromFile(file, category, id);
+
+                prizes[id] = prize;
+            }
+        }
 
         /// <summary>
         /// Loads the status of a collection from a file.
@@ -62,7 +79,7 @@ namespace FinalProject
                 writer.Write(count);
                 for (int i = 0; i <= count / 32; i++)
                 {
-                    writer.Write(0);
+                    writer.Write(3);
                 }
             }
         }

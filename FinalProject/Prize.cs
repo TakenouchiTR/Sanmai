@@ -39,6 +39,7 @@ namespace FinalProject
         #endregion
 
         #region Fields
+        private int id;
         private string[] display;
         private string name;
         private string description;
@@ -51,6 +52,7 @@ namespace FinalProject
         public string Description => description;
         public string Price => price;
         public PrizeCategory Category => category;
+        public int ID => id;
         #endregion
 
         #region Constructors
@@ -82,7 +84,7 @@ namespace FinalProject
         /// <param name="file">Path to the prize file</param>
         /// <param name="category">Category of the prize</param>
         /// <returns>Prize generated from the file if successful; default prize if unsuccessful</returns>
-        public static Prize FromFile(string file, PrizeCategory category)
+        public static Prize FromFile(string file, PrizeCategory category, int id)
         {
             try
             {
@@ -106,6 +108,7 @@ namespace FinalProject
                     result.description = reader.ReadLine();
                     result.price = reader.ReadLine();
                     result.category = category;
+                    result.id = id;
                 }
 
                 return result;
@@ -133,7 +136,7 @@ namespace FinalProject
 
                 string file = files[ran.Next(0, files.Length)];
 
-                return FromFile(file, category);
+                return FromFile(file, category, int.Parse(Path.GetFileNameWithoutExtension(file)));
             }
             catch
             {

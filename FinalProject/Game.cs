@@ -220,6 +220,8 @@ namespace FinalProject
                     t.Join();
             }
 
+            Collection.PrizeStatus[prize.ID] = true;
+
             return result;
         }
 
@@ -373,6 +375,22 @@ namespace FinalProject
             {
                 doors[i].Prize = prizes[i];
             }
+        }
+        #endregion
+
+        #region Draw Methods
+        public void Hide()
+        {
+            foreach (Door d in doors)
+                d.Hide();
+
+            foreach (Button b in doorButtons)
+                b.Hide();
+
+            foreach (Button b in yesNoButtons)
+                b.Hide();
+
+            textBox.Hide();
         }
         #endregion
     }
