@@ -1,4 +1,11 @@
-﻿using System;
+﻿//Name:    Shawn Carter
+//Date:    11/09/2020
+//File:    ImageBuffer.cs
+//Purpose: This class allows the user to draw to multiple parts of an "image" before drawing the entire image to
+//           the screen. The purpose is to reduce the number of Painter.Write() calls to allow for smoother multithread
+//           drawing. Currently unused as it can only support a single color, which makes it very limited.
+
+using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;

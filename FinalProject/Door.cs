@@ -1,4 +1,10 @@
-﻿using System;
+﻿//Name:    Shawn Carter
+//Date:    11/09/2020
+//File:    Door.cs
+//Purpose: This class represents a door that the player may select. Each door contains a prize, which 
+//           is revealed when the Open() method is called.
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;

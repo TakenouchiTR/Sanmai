@@ -1,4 +1,10 @@
-﻿using System;
+﻿//Name:    Shawn Carter
+//Date:    11/09/2020
+//File:    TextBox.cs
+//Purpose: This object allows for text to be easily written to a pre-defined area of the screen.
+//           Textboxes have borders, which clearly displays the outer edges of the textbox.
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;

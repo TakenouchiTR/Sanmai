@@ -1,4 +1,10 @@
-﻿using System;
+﻿//Name:    Shawn Carter
+//Date:    11/09/2020
+//File:    Button.cs
+//Purpose: This class displays a simple line of highlighted text, which will have a different
+//           background color depending on whether the button is active or not.
+
+using System;
 using System.Text;
 
 namespace FinalProject

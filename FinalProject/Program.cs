@@ -1,4 +1,9 @@
-﻿using System;
+﻿//Name:    Shawn Carter
+//Date:    11/09/2020
+//File:    Program.cs
+//Purpose: This class contains the entry point for the program handles the gamestate.
+
+using System;
 using System.Runtime.InteropServices;
 using System.Text;
 

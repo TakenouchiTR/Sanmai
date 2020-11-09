@@ -1,5 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿//Name:    Shawn Carter
+//Date:    11/09/2020
+//File:    Prize.cs
+//Purpose: This object represents a prize that the player can win. All information regarding the prize, such as it's name, 
+//           category, etc. are stored within the object.
+
+using System;
 using System.IO;
 using System.Text;
 
@@ -10,6 +15,23 @@ namespace FinalProject
         #region Constants
         public const int DISPLAY_WIDTH = 27;
         public const int DISPLAY_HEIGHT = 9;
+        public readonly int[][] SOUNDS = new int[][]
+        {
+            new int[]
+            {
+                2000, 75, 0,
+                1500, 75, 0,
+                2000, 75, 0,
+                1500, 75, 0,
+            },
+            new int[]
+            {
+                750, 200, 0,
+                750, 200, 0,
+                750, 200, 0
+            },
+            new int[] { 300, 700, 0 }
+        };
         #endregion
 
         #region Class Fields
@@ -117,6 +139,16 @@ namespace FinalProject
             {
                 return new Prize();
             }
+        }
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Plays the sound associated with the prize's category.
+        /// </summary>
+        public void PlaySound()
+        {
+            SoundPlayer.PlaySounds(SOUNDS[(int)Category]);
         }
         #endregion
 

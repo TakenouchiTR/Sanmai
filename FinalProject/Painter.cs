@@ -1,4 +1,10 @@
-﻿using System;
+﻿//Name:    Shawn Carter
+//Date:    11/09/2020
+//File:    Painter.cs
+//Purpose: This class handles all of the writing done to the screen, allowing for multiple threads to write without
+//           interfering with each other's colors or positions.
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 

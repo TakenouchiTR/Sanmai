@@ -1,4 +1,10 @@
-﻿using System;
+﻿//Name:    Shawn Carter
+//Date:    11/09/2020
+//File:    Game.cs
+//Purpose: This is the meat of the game. An instance of this class represents the primary gameplay loop,
+//           and handles all of the gameplay and display logic.
+
+using System;
 using System.Threading;
 
 namespace FinalProject
@@ -263,6 +269,8 @@ namespace FinalProject
                         doors[activeDoor].RandomOpen(50);
 
                         selectedDoor = activeDoor;
+
+                        doors[activeDoor].Prize.PlaySound();
                         return doors[activeDoor].Prize;
 
                     default:
