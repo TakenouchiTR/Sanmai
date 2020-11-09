@@ -19,6 +19,7 @@ namespace FinalProject
         private const string DOOR_TOP =    "_____________________________";
         private const string DOOR_BODY =   "│                           │";
         private const string DOOR_BOTTOM = "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾";
+        private const string HIDE_STRING = "                             ";
         private static readonly int[] SLOW_OPEN = new int[]
         {
             50, 50, 50, -1000, -750, -750, 2000, 25, 25, 25, 
@@ -145,7 +146,7 @@ namespace FinalProject
         /// <summary>
         /// Clears the door and redraws the edges
         /// </summary>
-        private void DrawBase() 
+        private void DrawBase()
         {
             //Top edge
             if (drawTop)
@@ -299,6 +300,21 @@ namespace FinalProject
                 for (int i = 0; i < DOOR_HEIGHT; i++)
                     Painter.Write('│', xPos, Y + i, ConsoleColor.White);
             }
+        }
+
+        /// <summary>
+        /// Hides the door from the display.
+        /// </summary>
+        public void Hide()
+        {
+            if (drawTop)
+                Painter.Write(HIDE_STRING, X, Y - 1);
+
+            for (int i = 0; i < DOOR_HEIGHT; i++)
+                Painter.Write(HIDE_STRING, X, Y + i);
+
+            if (drawBottom)
+                Painter.Write(HIDE_STRING, X, Bottom + 1);
         }
         #endregion
     }

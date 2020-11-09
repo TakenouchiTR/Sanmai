@@ -171,6 +171,21 @@ namespace FinalProject
 
             textLine = 0;
         }
+
+        /// <summary>
+        /// Hides the textbox from the screen, resetting the line that the text will draw to as well.
+        /// </summary>
+        public void Hide()
+        {
+            StringBuilder sb = new StringBuilder(width);
+            for (int i = 0; i < width; i++)
+                sb.Append(" ");
+
+            for (int i = 0; i < height; i++)
+                Painter.Write(sb.ToString(), x, y + i);
+
+            textLine = 0;
+        }
         #endregion
     }
 
