@@ -79,6 +79,10 @@ namespace FinalProject
         {
             GeneratePrizes();
 
+
+            foreach (Door d in doors)
+                d.Frame = 0;
+
             //Does an initial render of each item
             foreach (Door d in doors)
                 d.Draw();

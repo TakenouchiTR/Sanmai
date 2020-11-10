@@ -23,7 +23,11 @@ namespace FinalProject
         {
             id = 0;
             showcase.Prize = Collection.Prizes[id];
+            if (!Collection.PrizeStatus[id])
+                showcase.Frame = 0;
+
             showcase.Draw();
+           
             ChangePrize(0);
             textBox.DrawBorder();
         }
@@ -64,15 +68,15 @@ namespace FinalProject
             if (showcase.Closed && Collection.PrizeStatus[id])
             {
                 showcase.Prize = Collection.Prizes[id];
-                showcase.Open(50);
+                showcase.Open(25);
                 drawn = true;
             }
             else if (showcase.Opened && !Collection.PrizeStatus[id])
             {
-                showcase.Close(50);
-                showcase.Prize = Collection.Prizes[id];
+                showcase.Close(25);
             }
 
+            showcase.Prize = Collection.Prizes[id];
             //Draws the showcase if the the player has both the previous and current prizes
             if (showcase.Opened && !drawn)
                 showcase.Draw();
