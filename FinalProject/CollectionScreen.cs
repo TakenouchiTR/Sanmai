@@ -81,6 +81,9 @@ namespace FinalProject
             if (showcase.Opened && !drawn)
                 showcase.Draw();
 
+            textBox.WriteText("---" + (id + 1) + "---", TextAlign.Center);
+            textBox.WriteText();
+
             if (showcase.Opened)
             {
                 textBox.WriteText(showcase.Prize.Name);
@@ -89,7 +92,6 @@ namespace FinalProject
             }
             else
             {
-                textBox.WriteText();
                 textBox.WriteText("This prize has not been won yet.", TextAlign.Center);
             }
         }
