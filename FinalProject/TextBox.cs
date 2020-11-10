@@ -59,6 +59,21 @@ namespace FinalProject
         }
         #endregion
 
+        #region Methods
+        /// <summary>
+        /// Moves the active line to the row specified.
+        /// No action is taken if the line number is below 0 or grater than the number of rows.
+        /// </summary>
+        /// <param name="lineNum"></param>
+        public void ChangeLine(int lineNum)
+        {
+            if (lineNum < 0 || lineNum >= height - 2)
+                return;
+
+            textLine = lineNum;
+        }
+        #endregion
+
         #region Draw Methods
         /// <summary>
         /// Draws the borders of the textbox.
@@ -66,6 +81,9 @@ namespace FinalProject
         /// </summary>
         public void DrawBorder()
         {
+            if (borderType == BorderType.None)
+                return;
+
             char[] borderSet = BORDER_PIECES[(int)borderType];
 
             //Corners
@@ -100,7 +118,7 @@ namespace FinalProject
         public void WriteText(string text, TextAlign align = TextAlign.Left, int writeTime = 0)
         {
             //Instantly returns if the text is null
-            if (text == null)
+            if (text == null || textLine >= height - 2)
                 return;
 
             //Splits the text into words, and skips to the next line if there is nothing to display
@@ -172,6 +190,18 @@ namespace FinalProject
             textLine = 0;
         }
 
+        public void ClearLine()
+        {
+            if (textLine >= height - 2)
+                return;
+
+            StringBuilder sb = new StringBuilder(width - 2);
+            for (int i = 0; i < width - 2; i++)
+                sb.Append(' ');
+
+            Painter.Write(sb.ToString(), x + 1, y + 1 + textLine);
+        }
+
         /// <summary>
         /// Hides the textbox from the screen, resetting the line that the text will draw to as well.
         /// </summary>
@@ -205,7 +235,8 @@ namespace FinalProject
         DottedHeavy,
         DashedLight,
         DashedHeavy,
-        DoubleLine
+        DoubleLine,
+        None
     }
 
     enum BorderPiece

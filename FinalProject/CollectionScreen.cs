@@ -21,6 +21,7 @@ namespace FinalProject
 
         public void Startup()
         {
+            textBox.DrawBorder();
             id = 0;
             showcase.Prize = Collection.Prizes[id];
             if (!Collection.PrizeStatus[id])
@@ -29,7 +30,6 @@ namespace FinalProject
             showcase.Draw();
            
             ChangePrize(0);
-            textBox.DrawBorder();
         }
 
         public bool Play()
@@ -89,7 +89,8 @@ namespace FinalProject
             }
             else
             {
-                textBox.WriteText("This prize has not been won yet.");
+                textBox.WriteText();
+                textBox.WriteText("This prize has not been won yet.", TextAlign.Center);
             }
         }
 

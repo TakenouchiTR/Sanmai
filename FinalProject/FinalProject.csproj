@@ -2,13 +2,10 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="Prizes\Expensive\computer.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Prizes\Expensive\20.prz">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
