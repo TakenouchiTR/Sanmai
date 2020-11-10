@@ -48,6 +48,7 @@ namespace FinalProject
         public int Number { get => number; set => number = value; }
         public int Frame { get => frame; set => frame = value; }
         public bool Closed => Frame == 0;
+        public bool Opened => Frame != 0;
         public Prize Prize { get => prize; set => prize = value; }
         #endregion
 
