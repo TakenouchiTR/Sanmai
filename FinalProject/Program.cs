@@ -11,7 +11,7 @@ namespace FinalProject
 {
     class Program
     {
-        //Code for preventing resizing, shamelessly taken from 
+        //Code for preventing window resizing, shamelessly taken from 
         //  https://stackoverflow.com/questions/32062219/c-sharp-is-there-a-way-to-make-a-fixed-height-width-console
         const int MF_BYCOMMAND = 0x00000000;
         const int SC_MAXIMIZE = 0xF030;
@@ -26,11 +26,23 @@ namespace FinalProject
         [DllImport("kernel32.dll", ExactSpelling = true)]
         private static extern IntPtr GetConsoleWindow();
 
+        //Code for running code when the window closes with the X, shamelessly taken from
+        //  https://stackoverflow.com/questions/474679/capture-console-exit-c-sharp
+        [DllImport("Kernel32")]
+        private static extern bool SetConsoleCtrlHandler(EventHandler handler, bool add);
+
+        private delegate bool EventHandler(CtrlType sig);
+        static EventHandler closeHandler;
+
         static void Main(string[] args)
         {
             //Prevents the window from being reized, which will mess with the display
             DeleteMenu(GetSystemMenu(GetConsoleWindow(), false), SC_MAXIMIZE, MF_BYCOMMAND);
             DeleteMenu(GetSystemMenu(GetConsoleWindow(), false), SC_SIZE, MF_BYCOMMAND);
+
+            //Runs code when the window closes with the X. Used to save the collections file
+            closeHandler += new EventHandler(Handler);
+            SetConsoleCtrlHandler(closeHandler, true);
 
             Console.CursorVisible = false;
             Console.OutputEncoding = Encoding.UTF8;
@@ -81,7 +93,32 @@ namespace FinalProject
                         break;
                 }
             }
+
             Collection.WriteToFile("collection.txt");
         }
+
+        private static bool Handler(CtrlType sig)
+        {
+            Collection.WriteToFile("collection.txt");
+
+            switch (sig)
+            {
+                case CtrlType.CTRL_C_EVENT:
+                case CtrlType.CTRL_LOGOFF_EVENT:
+                case CtrlType.CTRL_SHUTDOWN_EVENT:
+                case CtrlType.CTRL_CLOSE_EVENT:
+                default:
+                    return false;
+            }
+        }
+    }
+
+    enum CtrlType
+    {
+        CTRL_C_EVENT = 0,
+        CTRL_BREAK_EVENT = 1,
+        CTRL_CLOSE_EVENT = 2,
+        CTRL_LOGOFF_EVENT = 5,
+        CTRL_SHUTDOWN_EVENT = 6
     }
 }
