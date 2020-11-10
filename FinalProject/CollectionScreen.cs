@@ -21,11 +21,11 @@ namespace FinalProject
 
         public void Startup()
         {
+            id = 0;
             showcase.Prize = Collection.Prizes[id];
             showcase.Draw();
+            ChangePrize(0);
             textBox.DrawBorder();
-            if (Collection.PrizeStatus[id])
-                showcase.Open(50);
         }
 
         public bool Play()
@@ -34,37 +34,66 @@ namespace FinalProject
             {
                 ConsoleKeyInfo key = Console.ReadKey();
 
-                if (key.Key == ConsoleKey.RightArrow || key.Key == ConsoleKey.LeftArrow) 
+                switch (key.Key)
                 {
-
-                    id += key.Key == ConsoleKey.RightArrow ? 1 : -1;
-
-                    if (id < 0)
-                        id += Collection.Count;
-                    else if (id >= Collection.Count)
-                        id -= Collection.Count;
-
-                    if (showcase.Closed && Collection.PrizeStatus[id])
-                    {
-                        showcase.Prize = Collection.Prizes[id];
-                        showcase.Open(50);
-                    }
-                    else if (!showcase.Closed && !Collection.PrizeStatus[id])
-                    {
-                        showcase.Close(50);
-                        showcase.Prize = Collection.Prizes[id];
-                    }
-                    else if (!showcase.Closed)
-                    {
-                        showcase.Prize = Collection.Prizes[id];
-                        showcase.Draw();
-                    }
-
-
+                    case ConsoleKey.RightArrow:
+                        ChangePrize(1);
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        ChangePrize(-1);
+                        break;
+                    case ConsoleKey.Escape:
+                        return true;
                 }
             }
+        }
 
-            return false;
+        private void ChangePrize(int amount)
+        {
+            id += amount;
+            bool drawn = false;
+
+            if (id < 0)
+                id += Collection.Count;
+            else if (id >= Collection.Count)
+                id -= Collection.Count;
+
+            textBox.ClearText();
+
+            //Checks if the shocase doors need to be open or closed.
+            if (showcase.Closed && Collection.PrizeStatus[id])
+            {
+                showcase.Prize = Collection.Prizes[id];
+                showcase.Open(50);
+                drawn = true;
+            }
+            else if (showcase.Opened && !Collection.PrizeStatus[id])
+            {
+                showcase.Close(50);
+                showcase.Prize = Collection.Prizes[id];
+            }
+
+            //Draws the showcase if the the player has both the previous and current prizes
+            if (showcase.Opened && !drawn)
+                showcase.Draw();
+
+            if (showcase.Opened)
+            {
+                textBox.WriteText(showcase.Prize.Name);
+                textBox.WriteText(showcase.Prize.Description);
+                textBox.WriteText(showcase.Prize.Price);
+            }
+            else
+            {
+                textBox.WriteText("This prize has not been won yet.");
+            }
+        }
+
+        public void Hide()
+        {
+            showcase.Hide();
+            textBox.Hide();
+            Console.Clear();
         }
     }
 }

@@ -34,7 +34,7 @@ namespace FinalProject
 
             Console.CursorVisible = false;
             Console.OutputEncoding = Encoding.UTF8;
-            Painter.DefaultFrontColor = ConsoleColor.Black;
+            //Painter.DefaultFrontColor = ConsoleColor.Black;
 
             Collection.LoadCollectionFile("collection.txt");
             for (int i = 0; i < Collection.Count; i++)
@@ -45,24 +45,42 @@ namespace FinalProject
             Collection.LoadPrizeFolder("Prizes\\Expensive\\", PrizeCategory.Expensive);
 
             bool playing = true;
+            Title title = new Title();
             Game game = new Game();
             CollectionScreen collectionScreen = new CollectionScreen();
-
-            game.Setup();
             
             while (playing)
             {
-                playing = game.Play();
+                title.Setup();
+                int option = title.SelectOption();
+                title.Hide();
 
-                if (playing)
-                    game.Reset();
+                switch (option)
+                {
+                    case 0:
+                        bool replay = true;
+                        game.Setup();
+
+                        while (replay)
+                        {
+                            replay = game.Play();
+
+                            if (playing)
+                                game.Reset();
+                        }
+
+                        game.Hide();
+                        break;
+                    case 1:
+                        collectionScreen.Startup();
+                        collectionScreen.Play();
+                        collectionScreen.Hide();
+                        break;
+                    case 2:
+                        playing = false;
+                        break;
+                }
             }
-
-            game.Hide();
-
-            collectionScreen.Startup();
-            collectionScreen.Play();
-
             Collection.WriteToFile("collection.txt");
         }
     }
