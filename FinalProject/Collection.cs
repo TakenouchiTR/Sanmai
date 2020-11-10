@@ -42,6 +42,8 @@ namespace FinalProject
         /// <param name="file">File path</param>
         public static void LoadCollectionFile(string file)
         {
+            if (!File.Exists(file))
+                CreateCollectionFile(file, 30);
             using (BinaryReader reader = new BinaryReader(File.OpenRead(file)))
             {
                 int count = reader.ReadInt32();
@@ -79,7 +81,7 @@ namespace FinalProject
                 writer.Write(count);
                 for (int i = 0; i <= count / 32; i++)
                 {
-                    writer.Write(3);
+                    writer.Write(0);
                 }
             }
         }
