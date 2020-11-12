@@ -11,6 +11,23 @@ namespace FinalProject
 {
     public class Title
     {
+        private string[] SPLASH = new string[]
+        {
+            " .ooHHHoo.         dHHHHHb        HHHHb      HHH  HHHHb         dHHHH        dHHHHHb        HHHHHHHHHHHHH",
+            "dHHHHHHHHHb       dHHH^HHHb       HHHHHb     HHH  HHHHHb       dHHHHH       dHHH^HHHb       HHHHHHHHHHHHH",
+            "HHHP    HHH      dHH/   \\HHb      HHH HHb    HHH  HHH HHb     dHH HHH      dHH/   \\HHb           HHH     ",
+            "HHH     \\HP      HHH     HHH      HHH HHHb   HHH  HHH HHH     HHH HHH      HHH     HHH           HHH     ",
+            "VHHA            dHHH     HHHb     HHH  HHH   HHH  HHH HHHb   dHHH HHH     dHHH     HHHb          HHH     ",
+            " \\HHH\\          HHHHHHHHHHHHH     HHH  \\HHb  HHH  HHH  HHH   HHH  HHH     HHHHHHHHHHHHH          HHH     ",
+            "   \\HHHH       dHHHHHHHHHHHHHb    HHH   HHH  HHH  HHH  HHH   HHH  HHH    dHHHHHHHHHHHHHb         HHH     ",
+            "     HHHHH     HHH         HHH    HHH   \\HHb HHH  HHH  HHHb dHHH  HHH    HHH         HHH         HHH     ",
+            "       HHHH   dHH/         \\HHb   HHH    HHH HHH  HHH   HHH HHH   HHH   dHH/         \\HHb        HHH     ",
+            "dHb     HHH   HHH           HHH   HHH    \\HHHHHH  HHH   HHHHHHH   HHH   HHH           HHH        HHH     ",
+            "HHHb   dHHH  dHHH           HHHb  HHH     \\HHHHH  HHH   HHHHHHH   HHH  dHHH           HHHb       HHH     ",
+            "\\HHHHHHHHH   HHHH           HHHH  HHH      HHHHH  HHH    HHHHH    HHH  HHHH           HHHH  HHHHHHHHHHHHH",
+            " `\"\"\"\"\"\"'    `\"\"'           `\"\"'  `\"'      `\"\"\"'  `\"'    `\"\"\"'    `''  `\"\"'           `\"\"'  \"\"\"\"\"\"\"\"\"\"\"\"\""
+        };
+
         private int activeButton;
         private Button[] buttons;
 
@@ -18,9 +35,9 @@ namespace FinalProject
         {
             buttons = new Button[3];
 
-            buttons[0] = new Button("Play", true, Console.WindowWidth / 2 - 15, Console.WindowHeight - 6);
-            buttons[1] = new Button("Collection", false, Console.WindowWidth / 2 - 6, Console.WindowHeight - 6);
-            buttons[2] = new Button("Exit", false, Console.WindowWidth / 2 + 9, Console.WindowHeight - 6);
+            buttons[0] = new Button("Play", true, Console.WindowWidth / 2 - 15, Console.WindowHeight - 2);
+            buttons[1] = new Button("Collection", false, Console.WindowWidth / 2 - 6, Console.WindowHeight - 2);
+            buttons[2] = new Button("Exit", false, Console.WindowWidth / 2 + 9, Console.WindowHeight - 2);
         }
 
         public void Setup()
@@ -39,6 +56,9 @@ namespace FinalProject
         {
             Console.CursorLeft = 0;
             Console.CursorTop = 0;
+
+            for (int i = 0; i < SPLASH.Length; i++)
+                Painter.Write(SPLASH[i], Console.WindowWidth / 2 - SPLASH[i].Length / 2, 1 + i);
 
             foreach (Button b in buttons)
                 b.Draw();
