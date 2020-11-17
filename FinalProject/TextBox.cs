@@ -5,7 +5,6 @@
 //           Textboxes have borders, which clearly displays the outer edges of the textbox.
 
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 

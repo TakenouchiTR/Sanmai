@@ -5,8 +5,6 @@
 //           is revealed when the Open() method is called.
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 
 namespace FinalProject

@@ -3,11 +3,7 @@
 //File:    Collection.cs
 //Purpose: This class tracks information about which prizes the user has and has not collected.
 
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace FinalProject
 {
