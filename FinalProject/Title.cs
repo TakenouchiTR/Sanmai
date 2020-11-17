@@ -4,8 +4,6 @@
 //Purpose: This class shows the title screen, allowing the user to choose between a handful of options.
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FinalProject
 {
@@ -25,7 +23,8 @@ namespace FinalProject
             "dHb     HHH   HHH           HHH   HHH    \\HHHHHH  HHH   HHHHHHH   HHH   HHH           HHH        HHH     ",
             "HHHb   dHHH  dHHH           HHHb  HHH     \\HHHHH  HHH   HHHHHHH   HHH  dHHH           HHHb       HHH     ",
             "\\HHHHHHHHH   HHHH           HHHH  HHH      HHHHH  HHH    HHHHH    HHH  HHHH           HHHH  HHHHHHHHHHHHH",
-            " `\"\"\"\"\"\"'    `\"\"'           `\"\"'  `\"'      `\"\"\"'  `\"'    `\"\"\"'    `''  `\"\"'           `\"\"'  \"\"\"\"\"\"\"\"\"\"\"\"\""
+            " `\"\"\"\"\"\"'    \"\"\"\"           \"\"\"\"  \"\"\"      \"\"\"\"\"  \"\"\"    \"\"\"\"\"    \"\"\"  \"\"\"\"" +
+            "           \"\"\"\"  \"\"\"\"\"\"\"\"\"\"\"\"\""
         };
 
         private int activeButton;
