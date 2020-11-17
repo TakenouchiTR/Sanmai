@@ -58,7 +58,7 @@ namespace FinalProject
             Console.CursorTop = 0;
 
             for (int i = 0; i < SPLASH.Length; i++)
-                Painter.Write(SPLASH[i], Console.WindowWidth / 2 - SPLASH[i].Length / 2, 1 + i);
+                Painter.Write(SPLASH[i], Console.WindowWidth / 2 - SPLASH[i].Length / 2, 1 + i, ConsoleColor.White);
 
             foreach (Button b in buttons)
                 b.Draw();
@@ -69,7 +69,7 @@ namespace FinalProject
 
             while (true)
             {
-                ConsoleKeyInfo key = Console.ReadKey();
+                ConsoleKeyInfo key = Input.GetKey();
 
                 switch (key.Key)
                 {

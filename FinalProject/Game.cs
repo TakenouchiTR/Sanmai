@@ -181,7 +181,7 @@ namespace FinalProject
                 for (int i = 0; i < doors.Length; i++)
                 {
                     int index = i;
-                    threads[index] = new Thread(() => doors[index].Open(25));
+                    threads[index] = new Thread(() => doors[index].Open());
                     threads[index].Start();
                 }
 
@@ -240,7 +240,7 @@ namespace FinalProject
             //Loops until the enter key is pressed
             while (true)
             {
-                switch (Console.ReadKey().Key)
+                switch (Input.GetKey().Key)
                 {
                     case LEFT_KEY:
                         doorButtons[activeDoor].Toggle();
@@ -271,8 +271,8 @@ namespace FinalProject
 
                         //Checks if a door was opened previously; closes it if true
                         if (selectedDoor != -1) 
-                            doors[selectedDoor].Close(50);
-                        doors[activeDoor].RandomOpen(50);
+                            doors[selectedDoor].Close();
+                        doors[activeDoor].RandomOpen();
 
                         selectedDoor = activeDoor;
 
@@ -331,7 +331,7 @@ namespace FinalProject
             //Loops until the enter key is pressed
             while (true)
             {
-                switch (Console.ReadKey().Key)
+                switch (Input.GetKey().Key)
                 {
                     case LEFT_KEY:
                     case RIGHT_KEY:

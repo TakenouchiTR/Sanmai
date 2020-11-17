@@ -35,6 +35,7 @@ namespace FinalProject
         private int x, y;
         private int frame;
         private int number;
+        private int speed;
         private bool drawTop;
         private bool drawBottom;
         private Prize prize;
@@ -68,10 +69,21 @@ namespace FinalProject
             prize = new Prize();
             drawTop = true;
             drawBottom = true;
+            speed = Settings.GetInt("speed");
+
+            Settings.ValueChanged += Settings_ValueChanged;
         }
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Plays the open animation.
+        /// </summary>
+        public void Open()
+        {
+            Open(speed);
+        }
+
         /// <summary>
         /// Plays the open animation at a given speed.
         /// </summary>
@@ -84,6 +96,14 @@ namespace FinalProject
                 Frame++;
                 Draw();
             }
+        }
+
+        /// <summary>
+        /// Plays the open animation, with a chance of playing a special animation.
+        /// </summary>
+        public void RandomOpen()
+        {
+            RandomOpen(speed);
         }
 
         /// <summary>
@@ -111,6 +131,14 @@ namespace FinalProject
         }
 
         /// <summary>
+        /// Plays the close animation.
+        /// </summary>
+        public void Close()
+        {
+            Close(speed);
+        }
+
+        /// <summary>
         /// Plays the close animation at a given speed.
         /// </summary>
         /// <param name="speed">Time in milliseconds between frames</param>
@@ -122,6 +150,16 @@ namespace FinalProject
                 Frame--;
                 Draw();
             }
+        }
+
+        /// <summary>
+        /// Event for when settings changed
+        /// </summary>
+        /// <param name="key">Key for the setting</param>
+        private void Settings_ValueChanged(string key)
+        {
+            if (key == "speed")
+                speed = Settings.GetInt(key);
         }
         #endregion
 

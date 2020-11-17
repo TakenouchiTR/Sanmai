@@ -36,7 +36,7 @@ namespace FinalProject
         {
             while (true)
             {
-                ConsoleKeyInfo key = Console.ReadKey();
+                ConsoleKeyInfo key = Input.GetKey();
 
                 switch (key.Key)
                 {

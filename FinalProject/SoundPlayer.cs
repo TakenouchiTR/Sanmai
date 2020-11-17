@@ -13,6 +13,23 @@ namespace FinalProject
 {
     public static class SoundPlayer
     {
+        private static  bool isMuted;
+        public static void Initialize()
+        {
+            Settings.ValueChanged += Settings_ValueChanged;
+            isMuted = false;
+        }
+
+        /// <summary>
+        /// Event for when settings changed
+        /// </summary>
+        /// <param name="key">Key for the setting</param>
+        private static void Settings_ValueChanged(string key)
+        {
+            if (key == "is_muted")
+                isMuted = Settings.GetBool(key);
+        }
+
         /// <summary>
         /// Plays a series of sounds in its own thread, allowing gameplay to continue.
         /// </summary>
@@ -24,7 +41,7 @@ namespace FinalProject
         /// </param>
         public static void PlaySounds(int[] soundData)
         {
-            if (soundData.Length % 3 != 0)
+            if (soundData.Length % 3 != 0 || Settings.GetBool("is_muted"))
                 return;
 
             new Thread(new ThreadStart(() =>

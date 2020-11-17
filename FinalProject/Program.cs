@@ -46,7 +46,15 @@ namespace FinalProject
 
             Console.CursorVisible = false;
             Console.OutputEncoding = Encoding.UTF8;
-            //Painter.DefaultFrontColor = ConsoleColor.Black;
+            Painter.DefaultFrontColor = ConsoleColor.Black;
+
+            SoundPlayer.Initialize();
+            Input.Initialize();
+
+            Settings.CreateDefaultFile("settings.txt");
+            Settings.LoadSettingsFile("settings.txt");
+
+            char c = Settings.GetChar("mute_key");
 
             Collection.LoadCollectionFile("collection.txt");
             for (int i = 0; i < Collection.Count; i++)
@@ -57,12 +65,12 @@ namespace FinalProject
             Collection.LoadPrizeFolder("Prizes\\Expensive\\", PrizeCategory.Expensive);
 
             bool playing = true;
-            Title title = new Title();
             Game game = new Game();
             CollectionScreen collectionScreen = new CollectionScreen();
             
             while (playing)
             {
+                Title title = new Title();
                 title.Setup();
                 int option = title.SelectOption();
                 title.Hide();
