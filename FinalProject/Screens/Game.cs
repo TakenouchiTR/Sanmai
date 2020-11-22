@@ -9,7 +9,7 @@ using System.Threading;
 using FinalProject.UI;
 using FinalProject.IO;
 
-namespace FinalProject.Screen
+namespace FinalProject.Screens
 {
     public class Game
     {
