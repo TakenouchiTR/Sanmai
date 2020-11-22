@@ -114,9 +114,10 @@ namespace FinalProject.Screens
                 //Makes the first letter of the name upper case
                 string name = char.ToUpper(showcase.Prize.Name[0]) + showcase.Prize.Name.Substring(1);
 
-                textBox.WriteText(name);
+                textBox.WriteText("Prize: " + name);
+                textBox.WriteText("Value: " + showcase.Prize.Price);
+                textBox.WriteText();
                 textBox.WriteText(showcase.Prize.Description);
-                textBox.WriteText(showcase.Prize.Price);
             }
             else
             {

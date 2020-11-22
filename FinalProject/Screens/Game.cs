@@ -130,7 +130,7 @@ namespace FinalProject.Screens
 
             //---Prize display---//
             textBox.ClearText();
-            textBox.WriteText("You got a " + prize.Name + "!");
+            textBox.WriteText("You got " + prize.Name + "!");
             textBox.WriteText(prize.Description);
             textBox.WriteText("This prize is worth a grand total of " + prize.Price + "!");
             textBox.WriteText();
@@ -157,7 +157,7 @@ namespace FinalProject.Screens
                 prize = SelectDoor();
 
                 textBox.ClearText();
-                textBox.WriteText("This time, you got a " + prize.Name + "!");
+                textBox.WriteText("This time, you got " + prize.Name + "!");
                 textBox.WriteText(prize.Description);
                 textBox.WriteText("This prize is worth a grand total of " + prize.Price + "!");
                 textBox.WriteText();
