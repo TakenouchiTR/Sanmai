@@ -13,6 +13,10 @@ namespace FinalProject
 {
     class Program
     {
+        private const string DATA_FOLDER = "data/";
+        private const string COLLECTION_FILE = DATA_FOLDER + "collection.txt";
+        private const string SETTINGS_FILE = DATA_FOLDER + "settings.txt";
+
         #region C++ DLLs
         //Code for preventing window resizing, shamelessly taken from 
         //  https://stackoverflow.com/questions/32062219/c-sharp-is-there-a-way-to-make-a-fixed-height-width-console
@@ -84,7 +88,8 @@ namespace FinalProject
                 }
             }
 
-            Collection.WriteToFile("collection.txt");
+            Collection.WriteToFile(COLLECTION_FILE);
+            Settings.WriteToFile(SETTINGS_FILE);
         }
 
         /// <summary>
@@ -108,12 +113,10 @@ namespace FinalProject
             Input.Initialize();
 
             //Loads the files
-            Settings.CreateDefaultFile("settings.txt");
-            Settings.LoadSettingsFile("settings.txt");
+            Settings.CreateDefaultFile(SETTINGS_FILE);
+            Settings.LoadSettingsFile(SETTINGS_FILE);
 
-            char c = Settings.GetChar("mute_key");
-
-            Collection.LoadCollectionFile("collection.txt");
+            Collection.LoadCollectionFile(COLLECTION_FILE);
             for (int i = 0; i < Collection.Count; i++)
                 Collection.Prizes[i] = Prize.FromFile("Prizes\\Zonk\\0.prz", PrizeCategory.Zonk, 0);
 
@@ -129,7 +132,8 @@ namespace FinalProject
         /// <returns></returns>
         private static bool CloseHandler(CtrlType sig)
         {
-            Collection.WriteToFile("collection.txt");
+            Collection.WriteToFile(COLLECTION_FILE);
+            Settings.WriteToFile(SETTINGS_FILE);
 
             switch (sig)
             {
