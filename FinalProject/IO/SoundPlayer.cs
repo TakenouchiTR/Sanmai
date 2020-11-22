@@ -13,8 +13,11 @@ namespace FinalProject.IO
 {
     public static class SoundPlayer
     {
-
+        #region Class Fields
         private static bool isMuted;
+        #endregion
+
+        #region Methods
         public static void Initialize()
         {
             Settings.ValueChanged += Settings_ValueChanged;
@@ -42,19 +45,24 @@ namespace FinalProject.IO
         /// </param>
         public static void PlaySounds(int[] soundData)
         {
-            if (soundData.Length % 3 != 0 || isMuted)
+            //Returns early if the data array isn't a valid length, or if the game is muted.
+            if (isMuted || soundData.Length % 3 != 0 || soundData.Length == 0)
                 return;
 
+            //Runs the sound player in a thread, allowing long sets of sounds to play without
+            // locking up the game.
             new Thread(new ThreadStart(() =>
             {
                 for (int i = 0; i < soundData.Length; i += 3)
                 {
                     Console.Beep(soundData[i], soundData[i + 1]);
-                    if (soundData[i + 2] != 0)
+
+                    //Sleeps if the delay is greater than 0ms
+                    if (soundData[i + 2] > 0)
                         Thread.Sleep(soundData[i + 2]);
                 }
             })).Start();
-            
         }
+        #endregion
     }
 }

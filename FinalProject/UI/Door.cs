@@ -41,14 +41,61 @@ namespace FinalProject.UI
         #endregion
 
         #region Properties
+        /// <summary>
+        /// X position of the left side of door
+        /// </summary>
         public int X { get => x; set => x = value; }
+
+        /// <summary>
+        /// Y position of the top of the door
+        /// </summary>
         public int Y { get => y; set => y = value; }
+
+        /// <summary>
+        /// X position of the right side of the door
+        /// </summary>
         public int Right => X + DOOR_WIDTH - 1;
+
+        /// <summary>
+        /// Y position of the bottom of the door
+        /// </summary>
         public int Bottom => Y + DOOR_HEIGHT - 1;
+
+        /// <summary>
+        /// Number to display in the center
+        /// </summary>
         public int Number { get => number; set => number = value; }
-        public int Frame { get => frame; set => frame = value; }
+
+        /// <summary>
+        /// Which frame the door animation is on
+        /// </summary>
+        public int Frame 
+        { 
+            get => frame;
+            set 
+            {
+                //Ensures that the frame is a valid value
+                if (value < 0)
+                    value = 0;
+                else if (value >= DOOR_WIDTH / 2)
+                    value = DOOR_WIDTH / 2 - 1;
+                frame = value;
+            }
+        }
+
+        /// <summary>
+        /// If the door is completely closed
+        /// </summary>
         public bool Closed => Frame == 0;
+
+        /// <summary>
+        /// If the door is NOT completely closed
+        /// </summary>
         public bool Opened => Frame != 0;
+
+        /// <summary>
+        /// The prize hidden behind the door
+        /// </summary>
         public Prize Prize { get => prize; set => prize = value; }
         #endregion
 

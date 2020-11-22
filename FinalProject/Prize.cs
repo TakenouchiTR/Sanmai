@@ -49,9 +49,24 @@ namespace FinalProject
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Name of the prize
+        /// </summary>
         public string Name => name;
+
+        /// <summary>
+        /// Description of the prize
+        /// </summary>
         public string Description => description;
+
+        /// <summary>
+        /// Price of the prize
+        /// </summary>
         public string Price => price;
+
+        /// <summary>
+        /// The category of the prize
+        /// </summary>
         public PrizeCategory Category => category;
         public int ID => id;
         #endregion

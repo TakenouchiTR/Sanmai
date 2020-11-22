@@ -9,8 +9,15 @@ namespace FinalProject.IO
 {
     public static class Input
     {
-        private static char muteKey, speedUpKey, speedDownKey;
+        #region Class Fields
+        private static char muteKey;
+        private static char speedUpKey;
+        private static char speedDownKey;
+        #endregion
 
+        /// <summary>
+        /// Initializes keys to their default values and sets an event listener for the Setting.ValueChanged event
+        /// </summary>
         public static void Initialize()
         {
             muteKey = 'm';
@@ -48,8 +55,14 @@ namespace FinalProject.IO
         {
             ConsoleKeyInfo key = Console.ReadKey();
 
+            //Toggles whether the game is muted or not when the mute key is pressed.
             if (key.KeyChar == muteKey)
-                Settings.SetValue("is_muted", (!Settings.GetBool("is_muted")).ToString());
+            {
+                bool isMuted = !Settings.GetBool("is_muted");
+                Settings.SetValue("is_muted", isMuted.ToString());
+            }
+
+            //Adjusts the door opening speed when the appropriate key is pressed.
             if (key.KeyChar == speedUpKey)
             {
                 int speed = Settings.GetInt("speed");

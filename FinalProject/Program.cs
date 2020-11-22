@@ -13,6 +13,7 @@ namespace FinalProject
 {
     class Program
     {
+        #region C++ DLLs
         //Code for preventing window resizing, shamelessly taken from 
         //  https://stackoverflow.com/questions/32062219/c-sharp-is-there-a-way-to-make-a-fixed-height-width-console
         const int MF_BYCOMMAND = 0x00000000;
@@ -35,6 +36,7 @@ namespace FinalProject
 
         private delegate bool EventHandler(CtrlType sig);
         static EventHandler closeHandler;
+        #endregion
 
         static void Main(string[] args)
         {
@@ -82,6 +84,9 @@ namespace FinalProject
             Collection.WriteToFile("collection.txt");
         }
 
+        /// <summary>
+        /// Runs initialization code required to setup the game.
+        /// </summary>
         private static void Initialize()
         {
             //Prevents the window from being reized, which will mess with the display
@@ -99,6 +104,7 @@ namespace FinalProject
             SoundPlayer.Initialize();
             Input.Initialize();
 
+            //Loads the files
             Settings.CreateDefaultFile("settings.txt");
             Settings.LoadSettingsFile("settings.txt");
 
@@ -113,6 +119,11 @@ namespace FinalProject
             Collection.LoadPrizeFolder("Prizes\\Expensive\\", PrizeCategory.Expensive);
         }
 
+        /// <summary>
+        /// Runs whenever the window is closed to make sure that the collection file is always saved.
+        /// </summary>
+        /// <param name="sig">The type of close event</param>
+        /// <returns></returns>
         private static bool CloseHandler(CtrlType sig)
         {
             Collection.WriteToFile("collection.txt");

@@ -17,7 +17,7 @@ namespace FinalProject.UI
         private static ConsoleColor INACTIVE_COLOR = ConsoleColor.DarkGray;
         #endregion
 
-        #region fields
+        #region Fields
         private bool active;
         private string text;
         private int x, y;
@@ -25,7 +25,13 @@ namespace FinalProject.UI
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Whether the button is drawn with an active or inactive background.
+        /// </summary>
         public bool Active => active;
+        /// <summary>
+        /// The text displayed in the button.
+        /// </summary>
         public string Text => text;
         #endregion
 

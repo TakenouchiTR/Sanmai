@@ -12,14 +12,31 @@ namespace FinalProject
     public delegate void ChangeHandler(string key);
     public static class Settings
     {
+        #region Events
+        /// <summary>
+        /// Occurs when a value for a key is either created or changed
+        /// </summary>
         public static event ChangeHandler ValueChanged;
-        private static Dictionary<string, string> values;
+        #endregion
 
+        #region Class Fields
+        private static Dictionary<string, string> values;
+        #endregion
+
+        #region Static Constructor
         static Settings()
         {
             values = new Dictionary<string, string>();
         }
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// Gets an int value for a given key.
+        /// Throws an exception if the value cannot be parsed into an int, or if the key does not exist.
+        /// </summary>
+        /// <param name="key">Name of the setting</param>
+        /// <returns>Integer value of a key</returns>
         public static int GetInt(string key)
         {
             if (!values.ContainsKey(key))
@@ -34,6 +51,12 @@ namespace FinalProject
             return result;
         }
 
+        /// <summary>
+        /// Gets a bool value for a given key.
+        /// Throws an exception if the value cannot be parsed into an bool, or if the key does not exist.
+        /// </summary>
+        /// <param name="key">Name of the setting</param>
+        /// <returns>Boolean value of a key</returns>
         public static bool GetBool(string key)
         {
             if (!values.ContainsKey(key))
@@ -48,6 +71,12 @@ namespace FinalProject
             return result;
         }
 
+        /// <summary>
+        /// Gets a char value for a given key.
+        /// Throws an exception if the value cannot be parsed into an int, or if the key does not exist.
+        /// </summary>
+        /// <param name="key">Name of the setting</param>
+        /// <returns>Character value of a key</returns>
         public static char GetChar(string key)
         {
             if (!values.ContainsKey(key))
@@ -62,6 +91,12 @@ namespace FinalProject
             return result;
         }
 
+        /// <summary>
+        /// Gets a value for a key
+        /// Throws an exception if the key does not exist.
+        /// </summary>
+        /// <param name="key">Name of the setting</param>
+        /// <returns>Value for the key</returns>
         public static string GetString(string key)
         {
             if (!values.ContainsKey(key))
@@ -70,6 +105,10 @@ namespace FinalProject
             return values[key];
         }
 
+        /// <summary>
+        /// Sets a value for a setting. Creates a new setting if doesn't exist already.
+        /// </summary>
+        /// <param name="key">Name of the setting</param>
         public static void SetValue(string key, string value)
         {
             values[key] = value;
@@ -77,6 +116,11 @@ namespace FinalProject
             ValueChanged.Invoke(key);
         }
 
+        /// <summary>
+        /// Loads a settings file from a given path.
+        /// If the file does not exist, a default file will be created, then loaded.
+        /// </summary>
+        /// <param name="fileName">Path to the file</param>
         public static void LoadSettingsFile(string fileName)
         {
             values.Clear();
@@ -96,6 +140,10 @@ namespace FinalProject
             }
         }
 
+        /// <summary>
+        /// Creates the default settings file at a location.
+        /// </summary>
+        /// <param name="fileName">Path to the file</param>
         public static void CreateDefaultFile(string fileName)
         {
             using (StreamWriter writer = new StreamWriter(File.OpenWrite(fileName)))
@@ -108,6 +156,10 @@ namespace FinalProject
             }
         }
 
+        /// <summary>
+        /// Saves the setting to a file.
+        /// </summary>
+        /// <param name="fileName">Path to the file</param>
         public static void WriteToFile(string fileName)
         {
             using (StreamWriter writer = new StreamWriter(File.OpenWrite(fileName)))
@@ -118,5 +170,6 @@ namespace FinalProject
                 }
             }
         }
+        #endregion
     }
 }

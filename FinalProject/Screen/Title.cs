@@ -11,6 +11,8 @@ namespace FinalProject.Screen
 {
     public class Title
     {
+        #region Class Fields
+        //Title of the game, maybe I should put this in a file.
         private string[] SPLASH = new string[]
         {
             " .ooHHHoo.         dHHHHHb        HHHHb      HHH  HHHHb         dHHHH        dHHHHHb        HHHHHHHHHHHHH",
@@ -31,7 +33,9 @@ namespace FinalProject.Screen
 
         private int activeButton;
         private Button[] buttons;
+        #endregion
 
+        #region Constructor
         public Title()
         {
             buttons = new Button[3];
@@ -40,7 +44,12 @@ namespace FinalProject.Screen
             buttons[1] = new Button("Collection", false, Console.WindowWidth / 2 - 6, Console.WindowHeight - 2);
             buttons[2] = new Button("Exit", false, Console.WindowWidth / 2 + 9, Console.WindowHeight - 2);
         }
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// Runs code that only needs to be run once to setup the screen
+        /// </summary>
         public void Setup()
         {
             if (!buttons[0].Active)
@@ -52,7 +61,13 @@ namespace FinalProject.Screen
 
             activeButton = 0;
         }
+        #endregion
 
+        #region Draw Methods
+        /// <summary>
+        /// Plays the scene, allowing the player to choose an option
+        /// </summary>
+        /// <returns>Magic number representing the chosen option (Change to enum later)</returns>
         public int SelectOption()
         {
             Console.CursorLeft = 0;
@@ -90,9 +105,13 @@ namespace FinalProject.Screen
             }
         }
 
+        /// <summary>
+        /// Removes the screen from the console.
+        /// </summary>
         public void Hide()
         {
             Console.Clear();
         }
+        #endregion
     }
 }

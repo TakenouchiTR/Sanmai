@@ -9,13 +9,37 @@ namespace FinalProject
 {
     public static class Collection
     {
+        #region Class Fields
         private static bool[] prizeStatus;
         private static Prize[] prizes;
+        #endregion
 
+        #region Properties
+        /// <summary>
+        /// The list of bools representing which prizes have been collected
+        /// </summary>
         public static bool[] PrizeStatus => prizeStatus;
-        public static Prize[] Prizes => prizes;
-        public static int Count => prizes != null ? prizes.Length : 0;
 
+        /// <summary>
+        /// The list of prizes
+        /// </summary>
+        public static Prize[] Prizes => prizes;
+
+        /// <summary>
+        /// How long the list of prizes is.
+        /// Returns 0 if the list is null.
+        /// </summary>
+        public static int Count => prizes != null ? prizes.Length : 0;
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Loads all of the prize files (.prz) in a folder.
+        /// Files are assigned to an index in the list depending on their file name.
+        /// Files that have names that are num numbers, ids that are too large, or ids that are too small will be skipped.
+        /// </summary>
+        /// <param name="folder">Path to the directory</param>
+        /// <param name="category">Category for the folder</param>
         public static void LoadPrizeFolder(string folder, PrizeCategory category)
         {
             string[] files = Directory.GetFiles(folder, "*.prz");
@@ -25,7 +49,16 @@ namespace FinalProject
             foreach (string file in files)
             {
                 string fileName = Path.GetFileNameWithoutExtension(file);
-                int id = int.Parse(fileName);
+                int id;
+
+                //Ensures that the filename is in the correct format
+                if (!int.TryParse(fileName, out id))
+                    continue;
+
+                //Makes sure that the id is a valid value
+                if (id >= Count || id < 0)
+                    continue;
+
                 Prize prize = Prize.FromFile(file, category, id);
 
                 prizes[id] = prize;
@@ -34,12 +67,15 @@ namespace FinalProject
 
         /// <summary>
         /// Loads the status of a collection from a file.
+        /// Generates a new default file if it doesn't exist.
         /// </summary>
         /// <param name="file">File path</param>
         public static void LoadCollectionFile(string file)
         {
+            //Generates a new file if the file doesn't exist
             if (!File.Exists(file))
                 CreateCollectionFile(file, 30);
+
             using (BinaryReader reader = new BinaryReader(File.OpenRead(file)))
             {
                 int count = reader.ReadInt32();
@@ -111,5 +147,6 @@ namespace FinalProject
                 }
             }
         }
+        #endregion
     }
 }
