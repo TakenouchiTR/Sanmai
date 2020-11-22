@@ -4,7 +4,7 @@ using FinalProject.IO;
 
 namespace FinalProject.Screens
 {
-    public class CollectionScreen
+    public class CollectionScreen : Screen
     {
         #region Fields
         private int id;
@@ -26,7 +26,7 @@ namespace FinalProject.Screens
         /// <summary>
         /// Runs code that only needs to be run once to setup the screen
         /// </summary>
-        public void Startup()
+        public override void Setup()
         {
             textBox.DrawBorder();
 
@@ -44,7 +44,7 @@ namespace FinalProject.Screens
         /// Plays the screen until the user presses escape to quit.
         /// </summary>
         /// <returns></returns>
-        public void Play()
+        public override bool Play()
         {
             while (true)
             {
@@ -59,7 +59,7 @@ namespace FinalProject.Screens
                         ChangePrize(-1);
                         break;
                     case ConsoleKey.Escape:
-                        return;
+                        return false;
                 }
             }
         }
@@ -120,7 +120,7 @@ namespace FinalProject.Screens
         /// <summary>
         /// Removes the screen's elements from the console
         /// </summary>
-        public void Hide()
+        public override void Hide()
         {
             //I got lazy and just cleared the entire screen.
             Console.Clear();

@@ -9,7 +9,7 @@ using FinalProject.IO;
 
 namespace FinalProject.Screens
 {
-    public class Title
+    public class Title : Screen
     {
         #region Class Fields
         //Title of the game, maybe I should put this in a file.
@@ -33,6 +33,11 @@ namespace FinalProject.Screens
 
         private int activeButton;
         private Button[] buttons;
+        private TitleOption option;
+        #endregion
+
+        #region Properties
+        public TitleOption SelectedOption => option;
         #endregion
 
         #region Constructor
@@ -50,7 +55,7 @@ namespace FinalProject.Screens
         /// <summary>
         /// Runs code that only needs to be run once to setup the screen
         /// </summary>
-        public void Setup()
+        public override void Setup()
         {
             if (!buttons[0].Active)
                 buttons[0].Toggle(false);
@@ -61,14 +66,13 @@ namespace FinalProject.Screens
 
             activeButton = 0;
         }
-        #endregion
 
-        #region Draw Methods
         /// <summary>
-        /// Plays the scene, allowing the player to choose an option
+        /// Plays the scene, allowing the player to choose an option.
+        /// The chosen option is stored in the SelectedOption property.
         /// </summary>
-        /// <returns>Magic number representing the chosen option (Change to enum later)</returns>
-        public int SelectOption()
+        /// <returns></returns>
+        public override bool Play()
         {
             Console.CursorLeft = 0;
             Console.CursorTop = 0;
@@ -91,27 +95,39 @@ namespace FinalProject.Screens
                 {
                     case ConsoleKey.LeftArrow:
                         buttons[activeButton].Toggle();
-                        activeButton = activeButton == 0 ? buttons.Length - 1: activeButton - 1;
+                        activeButton = activeButton == 0 ? buttons.Length - 1 : activeButton - 1;
                         buttons[activeButton].Toggle();
                         break;
                     case ConsoleKey.RightArrow:
                         buttons[activeButton].Toggle();
-                        activeButton = activeButton == buttons.Length - 1 ? 0: activeButton + 1;
+                        activeButton = activeButton == buttons.Length - 1 ? 0 : activeButton + 1;
                         buttons[activeButton].Toggle();
                         break;
                     case ConsoleKey.Enter:
-                        return activeButton;
+                        option = (TitleOption)activeButton;
+                        return false;
                 }
             }
         }
+        #endregion
+
+        #region Draw Methods
+
 
         /// <summary>
         /// Removes the screen from the console.
         /// </summary>
-        public void Hide()
+        public override void Hide()
         {
             Console.Clear();
         }
         #endregion
+    }
+
+    public enum TitleOption
+    {
+        Play,
+        Collection,
+        Exit
     }
 }

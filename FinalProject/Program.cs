@@ -50,12 +50,14 @@ namespace FinalProject
             {
                 Title title = new Title();
                 title.Setup();
-                int option = title.SelectOption();
+                title.Play();
                 title.Hide();
+
+                TitleOption option = title.SelectedOption;
 
                 switch (option)
                 {
-                    case 0:
+                    case TitleOption.Play:
                         bool replay = true;
                         game.Setup();
 
@@ -70,12 +72,13 @@ namespace FinalProject
                         game.Hide();
                         break;
 
-                    case 1:
-                        collectionScreen.Startup();
+                    case TitleOption.Collection:
+                        collectionScreen.Setup();
                         collectionScreen.Play();
                         collectionScreen.Hide();
                         break;
-                    case 2:
+
+                    case TitleOption.Exit:
                         playing = false;
                         break;
                 }

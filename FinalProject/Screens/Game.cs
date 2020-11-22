@@ -11,7 +11,7 @@ using FinalProject.IO;
 
 namespace FinalProject.Screens
 {
-    public class Game
+    public class Game : Screen
     {
         #region Constants
         private const ConsoleKey RIGHT_KEY = ConsoleKey.RightArrow;
@@ -77,7 +77,7 @@ namespace FinalProject.Screens
         /// Sets up the game for first time play.
         /// Runs methods that cannot be run during creation as they affect the display.
         /// </summary>
-        public void Setup()
+        public override void Setup()
         {
             GeneratePrizes();
 
@@ -114,7 +114,7 @@ namespace FinalProject.Screens
         /// Plays a full round of the game
         /// </summary>
         /// <returns>True if the player wishes to play another round or not, False if the player wish to stop</returns>
-        public bool Play()
+        public override bool Play()
         {
             //---Intro and first door selection---//
             ShowButtons(doorButtons);
@@ -385,7 +385,7 @@ namespace FinalProject.Screens
         #endregion
 
         #region Draw Methods
-        public void Hide()
+        public override void Hide()
         {
             foreach (Door d in doors)
                 d.Hide();
