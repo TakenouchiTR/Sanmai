@@ -91,12 +91,12 @@ namespace FinalProject.Screens
             if (showcase.Closed && Collection.PrizeStatus[id])
             {
                 showcase.Prize = Collection.Prizes[id];
-                showcase.Open(25);
+                showcase.Open();
                 drawn = true;
             }
             else if (showcase.Opened && !Collection.PrizeStatus[id])
             {
-                showcase.Close(25);
+                showcase.Close();
             }
 
             showcase.Prize = Collection.Prizes[id];
@@ -111,7 +111,10 @@ namespace FinalProject.Screens
 
             if (showcase.Opened)
             {
-                textBox.WriteText(showcase.Prize.Name);
+                //Makes the first letter of the name upper case
+                string name = char.ToUpper(showcase.Prize.Name[0]) + showcase.Prize.Name.Substring(1);
+
+                textBox.WriteText(name);
                 textBox.WriteText(showcase.Prize.Description);
                 textBox.WriteText(showcase.Prize.Price);
             }
