@@ -38,33 +38,7 @@ namespace FinalProject
 
         static void Main(string[] args)
         {
-            //Prevents the window from being reized, which will mess with the display
-            DeleteMenu(GetSystemMenu(GetConsoleWindow(), false), SC_MAXIMIZE, MF_BYCOMMAND);
-            DeleteMenu(GetSystemMenu(GetConsoleWindow(), false), SC_SIZE, MF_BYCOMMAND);
-
-            //Runs code when the window closes with the X. Used to save the collections file
-            closeHandler += new EventHandler(Handler);
-            SetConsoleCtrlHandler(closeHandler, true);
-
-            Console.CursorVisible = false;
-            Console.OutputEncoding = Encoding.UTF8;
-            Painter.DefaultFrontColor = ConsoleColor.Black;
-
-            SoundPlayer.Initialize();
-            Input.Initialize();
-
-            Settings.CreateDefaultFile("settings.txt");
-            Settings.LoadSettingsFile("settings.txt");
-
-            char c = Settings.GetChar("mute_key");
-
-            Collection.LoadCollectionFile("collection.txt");
-            for (int i = 0; i < Collection.Count; i++)
-                Collection.Prizes[i] = Prize.FromFile("Prizes\\Zonk\\0.prz", PrizeCategory.Zonk, 0);
-
-            Collection.LoadPrizeFolder("Prizes\\Zonk\\", PrizeCategory.Zonk);
-            Collection.LoadPrizeFolder("Prizes\\Middle\\", PrizeCategory.Middle);
-            Collection.LoadPrizeFolder("Prizes\\Expensive\\", PrizeCategory.Expensive);
+            Initialize();
 
             bool playing = true;
             Game game = new Game();
@@ -93,6 +67,7 @@ namespace FinalProject
 
                         game.Hide();
                         break;
+
                     case 1:
                         collectionScreen.Startup();
                         collectionScreen.Play();
@@ -107,7 +82,38 @@ namespace FinalProject
             Collection.WriteToFile("collection.txt");
         }
 
-        private static bool Handler(CtrlType sig)
+        private static void Initialize()
+        {
+            //Prevents the window from being reized, which will mess with the display
+            DeleteMenu(GetSystemMenu(GetConsoleWindow(), false), SC_MAXIMIZE, MF_BYCOMMAND);
+            DeleteMenu(GetSystemMenu(GetConsoleWindow(), false), SC_SIZE, MF_BYCOMMAND);
+
+            //Runs code when the window closes with the X. Used to save the collections file
+            closeHandler += new EventHandler(CloseHandler);
+            SetConsoleCtrlHandler(closeHandler, true);
+
+            Console.CursorVisible = false;
+            Console.OutputEncoding = Encoding.UTF8;
+            Painter.DefaultFrontColor = ConsoleColor.Black;
+
+            SoundPlayer.Initialize();
+            Input.Initialize();
+
+            Settings.CreateDefaultFile("settings.txt");
+            Settings.LoadSettingsFile("settings.txt");
+
+            char c = Settings.GetChar("mute_key");
+
+            Collection.LoadCollectionFile("collection.txt");
+            for (int i = 0; i < Collection.Count; i++)
+                Collection.Prizes[i] = Prize.FromFile("Prizes\\Zonk\\0.prz", PrizeCategory.Zonk, 0);
+
+            Collection.LoadPrizeFolder("Prizes\\Zonk\\", PrizeCategory.Zonk);
+            Collection.LoadPrizeFolder("Prizes\\Middle\\", PrizeCategory.Middle);
+            Collection.LoadPrizeFolder("Prizes\\Expensive\\", PrizeCategory.Expensive);
+        }
+
+        private static bool CloseHandler(CtrlType sig)
         {
             Collection.WriteToFile("collection.txt");
 
