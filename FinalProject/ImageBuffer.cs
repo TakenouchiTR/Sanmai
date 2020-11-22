@@ -6,9 +6,7 @@
 //           drawing. Currently unused as it can only support a single color, which makes it very limited.
 
 using System;
-using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
+using FinalProject.IO;
 
 namespace FinalProject
 {

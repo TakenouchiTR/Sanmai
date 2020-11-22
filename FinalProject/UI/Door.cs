@@ -6,8 +6,9 @@
 
 using System;
 using System.Threading;
+using FinalProject.IO;
 
-namespace FinalProject
+namespace FinalProject.UI
 {
     public class Door
     {

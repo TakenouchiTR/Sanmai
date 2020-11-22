@@ -5,7 +5,7 @@
 
 using System;
 
-namespace FinalProject
+namespace FinalProject.IO
 {
     public static class Input
     {

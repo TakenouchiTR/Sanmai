@@ -6,8 +6,9 @@
 
 using System;
 using System.Text;
+using FinalProject.IO;
 
-namespace FinalProject
+namespace FinalProject.UI
 {
     public class Button
     {

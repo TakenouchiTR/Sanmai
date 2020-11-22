@@ -6,6 +6,8 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
+using FinalProject.Screen;
+using FinalProject.IO;
 
 namespace FinalProject
 {

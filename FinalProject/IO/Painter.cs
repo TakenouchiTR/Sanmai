@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FinalProject
+namespace FinalProject.IO
 {
     public static class Painter
     {

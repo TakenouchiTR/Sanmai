@@ -4,8 +4,10 @@
 //Purpose: This class shows the title screen, allowing the user to choose between a handful of options.
 
 using System;
+using FinalProject.UI;
+using FinalProject.IO;
 
-namespace FinalProject
+namespace FinalProject.Screen
 {
     public class Title
     {

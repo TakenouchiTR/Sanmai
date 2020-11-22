@@ -1,6 +1,8 @@
 ﻿using System;
+using FinalProject.UI;
+using FinalProject.IO;
 
-namespace FinalProject
+namespace FinalProject.Screen
 {
     public class CollectionScreen
     {

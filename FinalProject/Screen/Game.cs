@@ -6,8 +6,10 @@
 
 using System;
 using System.Threading;
+using FinalProject.UI;
+using FinalProject.IO;
 
-namespace FinalProject
+namespace FinalProject.Screen
 {
     public class Game
     {

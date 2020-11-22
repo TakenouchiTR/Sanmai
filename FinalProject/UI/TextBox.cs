@@ -7,8 +7,9 @@
 using System;
 using System.Text;
 using System.Threading;
+using FinalProject.IO;
 
-namespace FinalProject
+namespace FinalProject.UI
 {
     public class TextBox
     {
