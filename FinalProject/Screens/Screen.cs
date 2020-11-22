@@ -1,6 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//Name:    Shawn Carter
+//Date:    11/22/2020
+//File:    Screen.cs
+//Purpose: This class serves as the framework for the different screens in the game.
+
+using System;
 
 namespace FinalProject.Screens
 {
@@ -10,6 +13,12 @@ namespace FinalProject.Screens
 
         public abstract bool Play();
 
-        public abstract void Hide();
+        /// <summary>
+        /// Clears the Screen from the console.
+        /// </summary>
+        public void Hide() 
+        {
+            Console.Clear();
+        }
     }
 }

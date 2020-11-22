@@ -116,15 +116,6 @@ namespace FinalProject.Screens
                 textBox.WriteText("This prize has not been won yet.", TextAlign.Center);
             }
         }
-
-        /// <summary>
-        /// Removes the screen's elements from the console
-        /// </summary>
-        public override void Hide()
-        {
-            //I got lazy and just cleared the entire screen.
-            Console.Clear();
-        }
         #endregion
     }
 }

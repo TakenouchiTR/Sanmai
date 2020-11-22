@@ -110,18 +110,6 @@ namespace FinalProject.Screens
             }
         }
         #endregion
-
-        #region Draw Methods
-
-
-        /// <summary>
-        /// Removes the screen from the console.
-        /// </summary>
-        public override void Hide()
-        {
-            Console.Clear();
-        }
-        #endregion
     }
 
     public enum TitleOption
