@@ -59,6 +59,10 @@ namespace FinalProject.Screens
                         ChangePrize(-1);
                         break;
                     case ConsoleKey.Escape:
+                        //This line fixes an issue with the title screen
+                        //  It appears that using a non-character key causes issues with writing to the console
+                        //  This line will be invisible, as the background and forground are both black.
+                        Painter.Write("This fixes a problem", 0, 0);
                         return false;
                 }
             }
