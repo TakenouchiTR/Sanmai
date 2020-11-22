@@ -74,9 +74,6 @@ namespace FinalProject.Screens
         /// <returns></returns>
         public override bool Play()
         {
-            Console.CursorLeft = 0;
-            Console.CursorTop = 0;
-
             for (int i = 0; i < SPLASH.Length; i++)
                 Painter.Write(SPLASH[i], Console.WindowWidth / 2 - SPLASH[i].Length / 2, 1 + i, ConsoleColor.White);
 

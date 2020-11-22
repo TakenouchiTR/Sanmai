@@ -77,8 +77,8 @@ namespace FinalProject.UI
                 //Ensures that the frame is a valid value
                 if (value < 0)
                     value = 0;
-                else if (value >= DOOR_WIDTH / 2)
-                    value = DOOR_WIDTH / 2 - 1;
+                else if (value > DOOR_WIDTH / 2)
+                    value = DOOR_WIDTH / 2;
                 frame = value;
             }
         }

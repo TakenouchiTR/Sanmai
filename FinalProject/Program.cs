@@ -8,12 +8,13 @@ using System.Runtime.InteropServices;
 using System.Text;
 using FinalProject.Screens;
 using FinalProject.IO;
+using System.IO;
 
 namespace FinalProject
 {
     class Program
     {
-        private const string DATA_FOLDER = "data/";
+        private const string DATA_FOLDER = "data/data/";
         private const string COLLECTION_FILE = DATA_FOLDER + "collection.txt";
         private const string SETTINGS_FILE = DATA_FOLDER + "settings.txt";
 
@@ -111,6 +112,10 @@ namespace FinalProject
 
             SoundPlayer.Initialize();
             Input.Initialize();
+
+            //Creates the data folder if it doesn't exist
+            if (!Directory.Exists(DATA_FOLDER))
+                Directory.CreateDirectory(DATA_FOLDER);
 
             //Loads the files
             Settings.CreateDefaultFile(SETTINGS_FILE);
