@@ -14,7 +14,7 @@ namespace FinalProject
 {
     class Program
     {
-        private const string DATA_FOLDER = "data/data/";
+        private const string DATA_FOLDER = "data/";
         private const string COLLECTION_FILE = DATA_FOLDER + "collection.txt";
         private const string SETTINGS_FILE = DATA_FOLDER + "settings.txt";
 
@@ -119,7 +119,6 @@ namespace FinalProject
                 Directory.CreateDirectory(DATA_FOLDER);
 
             //Loads the files
-            Settings.CreateDefaultFile(SETTINGS_FILE);
             Settings.LoadSettingsFile(SETTINGS_FILE);
 
             Collection.LoadCollectionFile(COLLECTION_FILE);

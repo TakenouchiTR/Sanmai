@@ -135,6 +135,8 @@ namespace FinalProject
                 while ((line = reader.ReadLine()) != null)
                 {
                     string[] split = line.Split(':');
+                    if (split.Length != 2)
+                        continue;
                     SetValue(split[0], split[1]);
                 }
             }
