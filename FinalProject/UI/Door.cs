@@ -158,7 +158,7 @@ namespace FinalProject.UI
         /// <param name="speed">Time in milliseconds between frames</param>
         public void RandomOpen(int speed)
         {
-            if (ran.Next(5) == 0)
+            if (ran.Next(10) == 0)
             {
                 foreach (int i in SLOW_OPEN)
                 {
