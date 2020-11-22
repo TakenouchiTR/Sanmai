@@ -91,6 +91,7 @@ namespace FinalProject
 
             Collection.WriteToFile(COLLECTION_FILE);
             Settings.WriteToFile(SETTINGS_FILE);
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         /// <summary>
