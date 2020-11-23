@@ -136,7 +136,7 @@ namespace FinalProject.UI
             while (index < words.Length)
             {
                 //Stops if there is no room left to write
-                if (textLine > height - 2)
+                if (textLine >= height - 2)
                     return;
 
                 //Repeatedly adds words to a line until everything is added, or there is no more room
