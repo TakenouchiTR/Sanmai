@@ -81,7 +81,7 @@ namespace FinalProject.Screens
         {
             spn_speed.SetIndexToItem(Settings.GetString("speed"), false);
             spn_mute.SetIndexToItem(Settings.GetString("is_muted"), false);
-            spn_mute.SetIndexToItem(Settings.GetString("do_slow_open"), false);
+            spn_slowOpen.SetIndexToItem(Settings.GetString("do_slow_open"), false);
             chr_mute.ChangeCharacter(Settings.GetChar("mute_key"), false);
             chr_speedUp.ChangeCharacter(Settings.GetChar("speed_up_key"), false);
             chr_speedDown.ChangeCharacter(Settings.GetChar("speed_down_key"), false);
@@ -155,10 +155,15 @@ namespace FinalProject.Screens
 
                         Settings.SetValue(KEYS[index], spn.SelectedItem);
                         break;
+
+                    case ConsoleKey.Escape:
+                        //This line fixes an issue with the title screen
+                        //  It appears that using a non-character key causes issues with writing to the console
+                        //  This line will be invisible, as the background and forground are both black.
+                        Painter.Write("This fixes a problem", 0, 0);
+                        return false;
                 }
             }
-            
-            return true;
         }
     }
 }
