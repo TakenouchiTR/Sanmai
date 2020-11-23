@@ -53,12 +53,19 @@ namespace FinalProject.IO
         /// Gets the next key press, checks if it matches a hotkey, then returns it
         /// </summary>
         /// <returns>KeyInfo of the key pressed</returns>
-        public static ConsoleKeyInfo GetKey()
+        public static ConsoleKeyInfo GetKey(bool checkHotkeys = true)
         {
             int x = Console.CursorLeft;
             int y = Console.CursorTop;
 
             ConsoleKeyInfo key = Console.ReadKey();
+
+            //Returns the key before checking hotkeys if specified
+            if (!checkHotkeys)
+            {
+                Console.SetCursorPosition(x, y);
+                return key;
+            }
 
             //Toggles whether the game is muted or not when the mute key is pressed.
             if (key.KeyChar == muteKey)
