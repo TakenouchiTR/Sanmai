@@ -1,7 +1,9 @@
 ﻿//Name:    Shawn Carter
 //Date:    11/17/2020
 //File:    Input.cs
-//Purpose: Serves as a way to handle all user input. -----------------------------Add more stuff later 
+//Purpose: Serves as a consolodated way to get user input.
+//           By using this class, the cursor position can be easily managed and hotkeys can be
+//           checked every time the user presses a key.
 
 using System;
 
