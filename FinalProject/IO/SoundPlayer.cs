@@ -46,7 +46,7 @@ namespace FinalProject.IO
         public static void PlaySounds(int[] soundData)
         {
             //Returns early if the data array isn't a valid length, or if the game is muted.
-            if (isMuted || soundData.Length % 3 != 0 || soundData.Length == 0)
+            if (!isMuted || soundData.Length % 3 != 0 || soundData.Length == 0)
                 return;
 
             //Runs the sound player in a thread, allowing long sets of sounds to play without
