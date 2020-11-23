@@ -120,7 +120,7 @@ namespace FinalProject.Screens
             ShowButtons(doorButtons);
 
             textBox.ClearText();
-            textBox.WriteText("Welcome to Let's Make a Deal!", TextAlign.Center);
+            textBox.WriteText("Welcome to Sanmai!", TextAlign.Center);
             textBox.WriteText("--------------------", TextAlign.Center);
             textBox.WriteText("Please use the left and right arrow keys to select a door. " +
                 "Once you've chosen a door that you like, press Enter to open it. " +
@@ -132,7 +132,7 @@ namespace FinalProject.Screens
             textBox.ClearText();
             textBox.WriteText("You got " + prize.Name + "!");
             textBox.WriteText(prize.Description);
-            textBox.WriteText("This prize is worth a grand total of " + prize.Price + "!");
+            textBox.WriteText("This prize is worth a total of " + prize.Price + "!");
             textBox.WriteText();
             textBox.WriteText("If you don't want this, you can try your luck at one of the other doors!");
 
@@ -159,7 +159,7 @@ namespace FinalProject.Screens
                 textBox.ClearText();
                 textBox.WriteText("This time, you got " + prize.Name + "!");
                 textBox.WriteText(prize.Description);
-                textBox.WriteText("This prize is worth a grand total of " + prize.Price + "!");
+                textBox.WriteText("This prize is worth a total of " + prize.Price + "!");
                 textBox.WriteText();
                 textBox.WriteText("I hope you like this one better than the last one!");
             }
