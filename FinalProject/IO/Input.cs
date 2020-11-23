@@ -53,6 +53,9 @@ namespace FinalProject.IO
         /// <returns>KeyInfo of the key pressed</returns>
         public static ConsoleKeyInfo GetKey()
         {
+            int x = Console.CursorLeft;
+            int y = Console.CursorTop;
+
             ConsoleKeyInfo key = Console.ReadKey();
 
             //Toggles whether the game is muted or not when the mute key is pressed.
@@ -78,6 +81,8 @@ namespace FinalProject.IO
                 Settings.SetValue("speed", speed.ToString());
             }
 
+            //Keeps the cursor in place so that characters don't write over existing UI
+            Console.SetCursorPosition(x, y);
             return key;
         }
     }
