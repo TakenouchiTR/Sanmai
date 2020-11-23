@@ -89,6 +89,9 @@ namespace FinalProject.Screens
 
         public override bool Play()
         {
+            Painter.Write("Press esc to return to the title screen", Console.WindowWidth / 2 - 20,
+                Console.WindowHeight - 2, ConsoleColor.White);
+
             foreach (UIObject obj in elements)
                 obj.Draw();
 

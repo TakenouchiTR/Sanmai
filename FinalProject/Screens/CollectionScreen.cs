@@ -29,6 +29,8 @@ namespace FinalProject.Screens
         public override void Setup()
         {
             textBox.DrawBorder();
+            Painter.Write("Press esc to return to the title screen", Console.WindowWidth / 2 - 20, 
+                Console.WindowHeight - 2, ConsoleColor.White);
 
             id = 0;
             showcase.Prize = Collection.Prizes[id];
