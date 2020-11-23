@@ -75,7 +75,7 @@ namespace FinalProject.UI
         /// <param name="redraw">Optionally redraw the spinner</param>
         public void Next(bool redraw = true)
         {
-            if (!cycle && index == ItemCount + 1)
+            if (!cycle && index == ItemCount - 1)
                 return;
 
             index = (index + 1) % ItemCount;
