@@ -10,25 +10,14 @@ using FinalProject.IO;
 
 namespace FinalProject.UI
 {
-    public class Button
+    public class Button : UIObject
     {
-        #region Constants
-        private static ConsoleColor ACTIVE_COLOR = ConsoleColor.Gray;
-        private static ConsoleColor INACTIVE_COLOR = ConsoleColor.DarkGray;
-        #endregion
-
         #region Fields
-        private bool active;
         private string text;
-        private int x, y;
         private string hideString;
         #endregion
 
         #region Properties
-        /// <summary>
-        /// Whether the button is drawn with an active or inactive background.
-        /// </summary>
-        public bool Active => active;
         /// <summary>
         /// The text displayed in the button.
         /// </summary>
@@ -43,12 +32,9 @@ namespace FinalProject.UI
         /// <param name="active">Whether the button is active or not</param>
         /// <param name="x">Left edge of the button</param>
         /// <param name="y">Top edge of the button</param>
-        public Button(string text, bool active, int x, int y)
+        public Button(string text, bool active, int x, int y) : base(x, y, active)
         {
             this.text = text;
-            this.active = active;
-            this.x = x;
-            this.y = y;
 
             StringBuilder sb = new StringBuilder(text.Length + 2);
             for (int i = 0; i < text.Length + 2; i++)
@@ -62,9 +48,9 @@ namespace FinalProject.UI
         /// Toggles the button between active and inactive
         /// </summary>
         /// <param name="redraw">Whether to automatically redraw the button.</param>
-        public void Toggle(bool redraw = true)
+        public override void Toggle(bool redraw = true)
         {
-            active = !active;
+            base.Toggle();
 
             if (redraw)
                 Draw();
@@ -75,11 +61,11 @@ namespace FinalProject.UI
         /// <summary>
         /// Draws the button
         /// </summary>
-        public void Draw()
+        public override void Draw()
         {
             ConsoleColor backColor = Active ? ACTIVE_COLOR : INACTIVE_COLOR;
 
-            Painter.Write(" " + text + " ", x, y, ConsoleColor.Black, backColor);
+            Painter.Write(" " + text + " ", X, Y, ConsoleColor.Black, backColor);
         }
 
         /// <summary>
@@ -87,7 +73,7 @@ namespace FinalProject.UI
         /// </summary>
         public void Hide()
         {
-            Painter.Write(hideString, x, y);
+            Painter.Write(hideString, X, Y);
         }
         #endregion
     }
