@@ -43,11 +43,12 @@ namespace FinalProject.Screens
         #region Constructor
         public Title()
         {
-            buttons = new Button[3];
+            buttons = new Button[4];
 
-            buttons[0] = new Button("Play", true, Console.WindowWidth / 2 - 15, Console.WindowHeight - 2);
-            buttons[1] = new Button("Collection", false, Console.WindowWidth / 2 - 6, Console.WindowHeight - 2);
-            buttons[2] = new Button("Exit", false, Console.WindowWidth / 2 + 9, Console.WindowHeight - 2);
+            buttons[0] = new Button("Play", true, Console.WindowWidth / 2 - 19, Console.WindowHeight - 4);
+            buttons[1] = new Button("Collection", false, Console.WindowWidth / 2 - 12, Console.WindowHeight - 4);
+            buttons[2] = new Button("Settings", false, Console.WindowWidth / 2 + 1, Console.WindowHeight - 4);
+            buttons[3] = new Button("Exit", false, Console.WindowWidth / 2 + 13, Console.WindowHeight - 4);
         }
         #endregion
 
@@ -59,10 +60,9 @@ namespace FinalProject.Screens
         {
             if (!buttons[0].Active)
                 buttons[0].Toggle(false);
-            if (buttons[1].Active)
-                buttons[1].Toggle(false);
-            if (buttons[2].Active)
-                buttons[2].Toggle(false);
+            for (int i = 1; i < buttons.Length; i++)
+                if (buttons[i].Active)
+                    buttons[i].Toggle(false);
 
             activeButton = 0;
         }
@@ -113,6 +113,7 @@ namespace FinalProject.Screens
     {
         Play,
         Collection,
+        Settings,
         Exit
     }
 }

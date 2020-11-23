@@ -50,6 +50,7 @@ namespace FinalProject
             bool playing = true;
             Game game = new Game();
             CollectionScreen collectionScreen = new CollectionScreen();
+            SettingsScreen settingsScreen = new SettingsScreen();
             
             while (playing)
             {
@@ -81,6 +82,12 @@ namespace FinalProject
                         collectionScreen.Setup();
                         collectionScreen.Play();
                         collectionScreen.Hide();
+                        break;
+
+                    case TitleOption.Settings:
+                        settingsScreen.Setup();
+                        settingsScreen.Play();
+                        settingsScreen.Hide();
                         break;
 
                     case TitleOption.Exit:
