@@ -22,6 +22,8 @@ namespace FinalProject.UI
         /// The text displayed in the button.
         /// </summary>
         public string Text => text;
+
+        public override int Width => text.Length;
         #endregion
 
         #region Constructors
@@ -74,6 +76,17 @@ namespace FinalProject.UI
         public void Hide()
         {
             Painter.Write(hideString, X, Y);
+        }
+
+        public override void Move(int x, int y, bool redraw = true)
+        {
+            if (redraw)
+                Hide();
+
+            base.Move(x, y);
+
+            if (redraw)
+                Draw();
         }
         #endregion
     }

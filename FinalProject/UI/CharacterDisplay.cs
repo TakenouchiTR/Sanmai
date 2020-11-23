@@ -15,6 +15,8 @@ namespace FinalProject.UI
 
         public char Character => character;
 
+        public override int Width => 3;
+
         public CharacterDisplay(int x, int y, char c) : base(x, y, false)
         {
             character = c;
@@ -50,6 +52,22 @@ namespace FinalProject.UI
             ConsoleColor foreColor = isChanging ? CHANGE_COLOR : NORMAL_COLOR;
 
             Painter.Write("[" + character + "]", X, Y, foreColor, backColor);
+        }
+
+        public void Hide()
+        {
+            Painter.Write("   ", X, Y);
+        }
+
+        public override void Move(int x, int y, bool redraw = true)
+        {
+            if (redraw)
+                Hide();
+
+            base.Move(x, y);
+
+            if (redraw)
+                Draw();
         }
     }
 }

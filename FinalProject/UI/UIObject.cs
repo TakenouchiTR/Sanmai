@@ -22,6 +22,11 @@ namespace FinalProject.UI
 
         public int Y => y;
 
+        public abstract int Width 
+        {
+            get;
+        }
+
         protected UIObject(int x, int y, bool active)
         {
             this.x = x;
@@ -39,5 +44,11 @@ namespace FinalProject.UI
         }
 
         public abstract void Draw();
+
+        public virtual void Move(int x, int y, bool redraw = true)
+        {
+            this.x = x;
+            this.y = y;
+        }
     }
 }

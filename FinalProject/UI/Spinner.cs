@@ -19,6 +19,8 @@ namespace FinalProject.UI
 
         public int Right => X + width - 1;
 
+        public override int Width => width;
+
         public int ItemCount => items.Length;
 
         public string SelectedItem => items[index];
@@ -106,6 +108,17 @@ namespace FinalProject.UI
         public void Hide()
         {
             Painter.Write(clearString, X, Y);
+        }
+
+        public override void Move(int x, int y, bool redraw = true)
+        {
+            if (redraw)
+                Hide();
+
+            base.Move(x, y);
+
+            if (redraw)
+                Draw();
         }
     }
 }
