@@ -120,18 +120,21 @@ namespace FinalProject.Screens
 
                 switch (key.Key)
                 {
+                    //Selects the next item down
                     case ConsoleKey.DownArrow:
                         elements[index].Toggle();
                         index = (index + 1) % elements.Length;
                         elements[index].Toggle();
                         break;
 
+                    //Selects the next item up
                     case ConsoleKey.UpArrow:
                         elements[index].Toggle();
                         index = index == 0 ? elements.Length - 1 : index - 1;
                         elements[index].Toggle();
                         break;
 
+                    //If the player selects a Character Display, allow them to enter a new character
                     case ConsoleKey.Enter:
                         if (!(elements[index] is CharacterDisplay))
                             break;
@@ -141,6 +144,7 @@ namespace FinalProject.Screens
 
                         char c = ' ';
 
+                        //Loops until the player enters a valid character (alphanumeric + most punctuation)
                         while (!VALID_CHARS.IsMatch(c.ToString()))
                             c = Input.GetKey().KeyChar;
 
@@ -150,6 +154,7 @@ namespace FinalProject.Screens
                         Settings.SetValue(KEYS[index], c.ToString());
                         break;
 
+                    //Is a spinner is selected, goes to the spinner's previous item
                     case ConsoleKey.LeftArrow:
                         if (!(elements[index] is Spinner))
                             break;
@@ -161,6 +166,7 @@ namespace FinalProject.Screens
                         Settings.SetValue(KEYS[index], spn.SelectedItem);
                         break;
 
+                    //If a spinner is selected, goes to the spinner's next item
                     case ConsoleKey.RightArrow:
                         if (!(elements[index] is Spinner))
                             break;
