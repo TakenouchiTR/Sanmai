@@ -115,7 +115,7 @@ namespace FinalProject.Screens
 
             while (true)
             {
-                ConsoleKeyInfo key = Input.GetKey();
+                ConsoleKeyInfo key = Input.GetKey(false);
                 Spinner spn;
 
                 switch (key.Key)
