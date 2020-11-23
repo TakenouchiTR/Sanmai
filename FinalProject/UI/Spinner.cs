@@ -11,25 +11,39 @@ namespace FinalProject.UI
 {
     public class Spinner : UIObject
     {
+        #region Fields
         int width;
         int index;
         bool cycle;
         string clearString;
         string[] items;
+        #endregion
 
+        #region Properties
+        /// <summary>
+        /// The right side of the element
+        /// </summary>
         public int Right => X + width - 1;
 
         public override int Width => width;
 
+        /// <summary>
+        /// How many items are in the spinner
+        /// </summary>
         public int ItemCount => items.Length;
 
+        /// <summary>
+        /// The currently selected item
+        /// </summary>
         public string SelectedItem => items[index];
+        #endregion
 
-        public Spinner(int x, int y, string[] items, int index = 0) : base(x, y, false)
+        #region Constructors
+        public Spinner(int x, int y, string[] items, bool cycle, int index = 0) : base(x, y, false)
         {
             this.items = items;
             this.index = index;
-            cycle = true;
+            this.cycle = cycle;
 
             foreach (string s in items)
                 width = width > s.Length ? width : s.Length;
@@ -42,7 +56,9 @@ namespace FinalProject.UI
 
             clearString = sb.ToString();
         }
+        #endregion
 
+        #region Methods
         public override void Toggle(bool redraw = true)
         {
             base.Toggle();
@@ -51,6 +67,12 @@ namespace FinalProject.UI
                 Draw();
         }
 
+        /// <summary>
+        /// Goes to the next item on the list of items. 
+        /// If the spinner is at the end and it set to cycle, goes back to the beginning.
+        /// Optionally redraws the spinner after chaning items.
+        /// </summary>
+        /// <param name="redraw">Optionally redraw the spinner</param>
         public void Next(bool redraw = true)
         {
             if (!cycle && index == ItemCount + 1)
@@ -62,6 +84,12 @@ namespace FinalProject.UI
                 Draw();
         }
 
+        /// <summary>
+        /// Goes to the previous item on the list of items. 
+        /// If the spinner is at the beginning and it set to cycle, goes back to the end.
+        /// Optionally redraws the spinner after chaning items.
+        /// </summary>
+        /// <param name="redraw">Optionally redraw the spinner</param>
         public void Prev(bool redraw = true)
         {
             if (!cycle && index == 0)
@@ -89,6 +117,19 @@ namespace FinalProject.UI
             }
         }
 
+        public override void Move(int x, int y, bool redraw = true)
+        {
+            if (redraw)
+                Hide();
+
+            base.Move(x, y);
+
+            if (redraw)
+                Draw();
+        }
+        #endregion
+
+        #region Draw Methods
         public override void Draw()
         {
             ConsoleColor backColor = Active ? ACTIVE_COLOR : INACTIVE_COLOR;
@@ -105,20 +146,13 @@ namespace FinalProject.UI
             Painter.Write(SelectedItem, xPos, Y, ConsoleColor.Black, backColor);
         }
 
+        /// <summary>
+        /// Removes the item from the console output
+        /// </summary>
         public void Hide()
         {
             Painter.Write(clearString, X, Y);
         }
-
-        public override void Move(int x, int y, bool redraw = true)
-        {
-            if (redraw)
-                Hide();
-
-            base.Move(x, y);
-
-            if (redraw)
-                Draw();
-        }
+        #endregion
     }
 }

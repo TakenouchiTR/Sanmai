@@ -13,14 +13,15 @@ namespace FinalProject.Screens
 {
     public class SettingsScreen : Screen
     {
+        #region Constants
         private static readonly string[] LABELS = new string[]
         {
             "Door Speed:",
             "Muted:",
             "Do Slow Openings:",
             "Mute Hotkey:",
-            "Speed Up Hotkey: ",
-            "Speed Down Hotkey: "
+            "Speed Up Hotkey:",
+            "Speed Down Hotkey:"
         };
         private static readonly string[] KEYS = new string[]
         {
@@ -32,7 +33,9 @@ namespace FinalProject.Screens
             "speed_down_key"
         };
         private static readonly Regex VALID_CHARS = new Regex(@"[a-z0-9,.\\\[\]/`*\-]");
+        #endregion
 
+        #region Fields
         private int index;
         private Spinner spn_speed;
         private Spinner spn_mute;
@@ -42,12 +45,14 @@ namespace FinalProject.Screens
         private CharacterDisplay chr_speedDown;
 
         private UIObject[] elements;
+        #endregion
 
+        #region Constructors
         public SettingsScreen()
         {
             index = 0;
 
-            spn_speed = new Spinner(20, 1, new string[]
+            spn_speed = new Spinner(0, 0, new string[]
             {
                 "5",
                 "10",
@@ -55,12 +60,12 @@ namespace FinalProject.Screens
                 "30",
                 "40",
                 "50",
-            });
-            spn_mute = new Spinner(20, 3, new string[] { "True", "False" });
-            spn_slowOpen = new Spinner(20, 5, new string[] { "True", "False" });
-            chr_mute = new CharacterDisplay(20, 7, 'm');
-            chr_speedUp = new CharacterDisplay(20, 9, ']');
-            chr_speedDown = new CharacterDisplay(20, 11, '[');
+            }, false);
+            spn_mute = new Spinner(0, 0, new string[] { "True", "False" }, true);
+            spn_slowOpen = new Spinner(0, 0, new string[] { "True", "False" }, true);
+            chr_mute = new CharacterDisplay(0, 0, 'm');
+            chr_speedUp = new CharacterDisplay(0, 0, ']');
+            chr_speedDown = new CharacterDisplay(0, 0, '[');
 
             elements = new UIObject[]
             {
@@ -72,11 +77,19 @@ namespace FinalProject.Screens
                 chr_speedDown
             };
 
+            for (int i = 0; i < elements.Length; i++)
+            {
+                int xPos = Console.WindowWidth / 2 + 13 - elements[i].Width;
+                elements[i].Move(xPos, 3 + i * 2, false);
+            }
+
             elements[0].Toggle(false);
 
             Console.SetCursorPosition(0, 0);
         }
+        #endregion
 
+        #region Methods
         public override void Setup()
         {
             spn_speed.SetIndexToItem(Settings.GetString("speed"), false);
@@ -96,7 +109,7 @@ namespace FinalProject.Screens
                 obj.Draw();
 
             for (int i = 0; i < LABELS.Length; i++)
-                Painter.Write(LABELS[i], 1, 1 + i * 2, ConsoleColor.White);
+                Painter.Write(LABELS[i], Console.WindowWidth / 2 - 13, 3 + i * 2, ConsoleColor.White);
 
             Console.SetCursorPosition(0, 0);
 
@@ -168,5 +181,6 @@ namespace FinalProject.Screens
                 }
             }
         }
+        #endregion;
     }
 }
