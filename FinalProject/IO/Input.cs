@@ -69,15 +69,23 @@ namespace FinalProject.IO
             if (key.KeyChar == speedUpKey)
             {
                 int speed = Settings.GetInt("speed");
-                speed -= 5;
-                if (speed < 5)
+
+                if (speed == 10)
                     speed = 5;
+                else if (speed > 10)
+                    speed -= 10;
+
                 Settings.SetValue("speed", speed.ToString());
             }
             if (key.KeyChar == speedDownKey)
             {
                 int speed = Settings.GetInt("speed");
-                speed += 5;
+
+                if (speed == 5)
+                    speed = 10;
+                else if (speed < 50)
+                    speed += 10;
+
                 Settings.SetValue("speed", speed.ToString());
             }
 
