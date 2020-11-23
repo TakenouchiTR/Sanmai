@@ -107,7 +107,6 @@ namespace FinalProject.Screens
 
             //Draws text to the textbox
             textBox.WriteText("---" + (id + 1) + "---", TextAlign.Center);
-            textBox.WriteText();
 
             if (showcase.Opened)
             {
