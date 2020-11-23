@@ -155,6 +155,7 @@ namespace FinalProject
                 writer.WriteLine("speed_down_key:[");
                 writer.WriteLine("is_muted:false");
                 writer.WriteLine("speed:50");
+                writer.WriteLine("do_slow_open:False");
             }
         }
 
