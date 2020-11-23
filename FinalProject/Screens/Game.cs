@@ -116,120 +116,127 @@ namespace FinalProject.Screens
         /// <returns>True if the player wishes to play another round or not, False if the player wish to stop</returns>
         public override bool Play()
         {
-            //---Intro and first door selection---//
-            ShowButtons(doorButtons);
+            bool replay = true;
 
-            textBox.ClearText();
-            textBox.WriteText("Welcome to Sanmai!", TextAlign.Center);
-            textBox.WriteText("--------------------", TextAlign.Center);
-            textBox.WriteText("Please use the left and right arrow keys to select a door. " +
-                "Once you've chosen a door that you like, press Enter to open it. " +
-                "If you don't like what you got, you'll be given a chance to pick another door!");
-
-            Prize prize = SelectDoor();
-
-            //---Prize display---//
-            textBox.ClearText();
-            textBox.WriteText("You got " + prize.Name + "!");
-            textBox.WriteText(prize.Description);
-            textBox.WriteText("This prize is worth a total of " + prize.Price + "!");
-            textBox.WriteText();
-            textBox.WriteText("If you don't want this, you can try your luck at one of the other doors!");
-
-            //---Ask if the user wants to choose another door---//
-            HideButtons(doorButtons);
-            ResetYesNo();
-            ShowButtons(yesNoButtons);
-
-            if (GetYesNo())
+            while (replay)
             {
-                //---Second door---//
-                HideButtons(yesNoButtons);
+                //---Intro and first door selection---//
                 ShowButtons(doorButtons);
 
-                activeDoor = (activeDoor + 1) % doorButtons.Length;
-                doorButtons[activeDoor].Toggle();
-
                 textBox.ClearText();
-                textBox.WriteText();
-                textBox.WriteText("Take your time, this is your last chance at getting something good!", TextAlign.Center);
+                textBox.WriteText("Welcome to Sanmai!", TextAlign.Center);
+                textBox.WriteText("--------------------", TextAlign.Center);
+                textBox.WriteText("Please use the left and right arrow keys to select a door. " +
+                    "Once you've chosen a door that you like, press Enter to open it. " +
+                    "If you don't like what you got, you'll be given a chance to pick another door!");
 
-                prize = SelectDoor();
+                Prize prize = SelectDoor();
 
+                //---Prize display---//
                 textBox.ClearText();
-                textBox.WriteText("This time, you got " + prize.Name + "!");
+                textBox.WriteText("You got " + prize.Name + "!");
                 textBox.WriteText(prize.Description);
                 textBox.WriteText("This prize is worth a total of " + prize.Price + "!");
                 textBox.WriteText();
-                textBox.WriteText("I hope you like this one better than the last one!");
-                Input.GetKey();
-            }
+                textBox.WriteText("If you don't want this, you can try your luck at one of the other doors!");
 
-            //---Game finish---//
-            textBox.ClearText();
-            textBox.WriteText();
-            textBox.WriteText("Congratulations! I hope that your prize!", TextAlign.Center);
-            textBox.WriteText();
-            textBox.WriteText("Would you like so see all of your potential prizes?", TextAlign.Center);
-
-            //---Ask if the user wants to see the other prizes---//
-            HideButtons(doorButtons);
-            ResetYesNo();
-            ShowButtons(yesNoButtons);
-
-            if (GetYesNo())
-            {
-                //---Show other prizes---//
-                Thread[] threads = new Thread[doors.Length];
-                for (int i = 0; i < doors.Length; i++)
-                {
-                    int index = i;
-                    threads[index] = new Thread(() => doors[index].Open());
-                    threads[index].Start();
-                }
-
-                foreach (Thread t in threads)
-                    t.Join();
-
-                textBox.ClearText();
-                textBox.WriteText();
-                textBox.WriteText("I hope you got exactly what you wanted! Thank you for playing!", TextAlign.Center);
-            }
-            else
-            {
-                //---Don't show other prizes---//
+                //---Ask if the user wants to choose another door---//
+                HideButtons(doorButtons);
                 ResetYesNo();
-                textBox.ClearText();
-                textBox.WriteText();
-                textBox.WriteText("Not a problem! Thank you for playing!", TextAlign.Center);
-            }
+                ShowButtons(yesNoButtons);
 
-            //---New round prompt---//
-            textBox.WriteText();
-            textBox.WriteText("Would you like to try winning another fabulous prize?", TextAlign.Center);
-
-            bool result = GetYesNo();
-
-            ResetYesNo();
-            HideButtons(yesNoButtons);
-
-            if (result)
-            {
-                Thread[] threads = new Thread[doors.Length];
-                for (int i = 0; i < doors.Length; i++)
+                if (GetYesNo())
                 {
-                    int index = i;
-                    threads[index] = new Thread(() => doors[index].Close(25));
-                    threads[index].Start();
+                    //---Second door---//
+                    HideButtons(yesNoButtons);
+                    ShowButtons(doorButtons);
+
+                    activeDoor = (activeDoor + 1) % doorButtons.Length;
+                    doorButtons[activeDoor].Toggle();
+
+                    textBox.ClearText();
+                    textBox.WriteText();
+                    textBox.WriteText("Take your time, this is your last chance at getting something good!", TextAlign.Center);
+
+                    prize = SelectDoor();
+
+                    textBox.ClearText();
+                    textBox.WriteText("This time, you got " + prize.Name + "!");
+                    textBox.WriteText(prize.Description);
+                    textBox.WriteText("This prize is worth a total of " + prize.Price + "!");
+                    textBox.WriteText();
+                    textBox.WriteText("I hope you like this one better than the last one!");
+                    Input.GetKey();
                 }
 
-                foreach (Thread t in threads)
-                    t.Join();
+                //---Game finish---//
+                textBox.ClearText();
+                textBox.WriteText();
+                textBox.WriteText("Congratulations! I hope that your prize!", TextAlign.Center);
+                textBox.WriteText();
+                textBox.WriteText("Would you like so see all of your potential prizes?", TextAlign.Center);
+
+                //---Ask if the user wants to see the other prizes---//
+                HideButtons(doorButtons);
+                ResetYesNo();
+                ShowButtons(yesNoButtons);
+
+                if (GetYesNo())
+                {
+                    //---Show other prizes---//
+                    Thread[] threads = new Thread[doors.Length];
+                    for (int i = 0; i < doors.Length; i++)
+                    {
+                        int index = i;
+                        threads[index] = new Thread(() => doors[index].Open());
+                        threads[index].Start();
+                    }
+
+                    foreach (Thread t in threads)
+                        t.Join();
+
+                    textBox.ClearText();
+                    textBox.WriteText();
+                    textBox.WriteText("I hope you got exactly what you wanted! Thank you for playing!", TextAlign.Center);
+                }
+                else
+                {
+                    //---Don't show other prizes---//
+                    ResetYesNo();
+                    textBox.ClearText();
+                    textBox.WriteText();
+                    textBox.WriteText("Not a problem! Thank you for playing!", TextAlign.Center);
+                }
+
+                //---New round prompt---//
+                textBox.WriteText();
+                textBox.WriteText("Would you like to try winning another fabulous prize?", TextAlign.Center);
+
+                replay = GetYesNo();
+
+                ResetYesNo();
+                HideButtons(yesNoButtons);
+
+                if (replay)
+                {
+                    Thread[] threads = new Thread[doors.Length];
+                    for (int i = 0; i < doors.Length; i++)
+                    {
+                        int index = i;
+                        threads[index] = new Thread(() => doors[index].Close(25));
+                        threads[index].Start();
+                    }
+
+                    foreach (Thread t in threads)
+                        t.Join();
+
+                    Reset();
+                }
+
+                Collection.PrizeStatus[prize.ID] = true;
             }
 
-            Collection.PrizeStatus[prize.ID] = true;
-
-            return result;
+            return false;
         }
 
         /// <summary>

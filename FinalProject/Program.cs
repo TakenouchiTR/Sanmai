@@ -51,53 +51,51 @@ namespace FinalProject
             Game game = new Game();
             CollectionScreen collectionScreen = new CollectionScreen();
             SettingsScreen settingsScreen = new SettingsScreen();
-            
+
+            Title title = new Title();
+
             while (playing)
             {
-                Title title = new Title();
                 title.Setup();
                 title.Play();
                 title.Hide();
 
                 TitleOption option = title.SelectedOption;
 
+                //Ends the loop if the user selects Exit
+                if (option == TitleOption.Exit)
+                    playing = false;
+
+                //Gets the screen that the player selected
+                Screen screen = null;
                 switch (option)
                 {
                     case TitleOption.Play:
-                        bool replay = true;
-                        game.Setup();
-
-                        while (replay)
-                        {
-                            replay = game.Play();
-
-                            if (playing)
-                                game.Reset();
-                        }
-
-                        game.Hide();
+                        screen = game;
                         break;
 
                     case TitleOption.Collection:
-                        collectionScreen.Setup();
-                        collectionScreen.Play();
-                        collectionScreen.Hide();
+                        screen = collectionScreen;
                         break;
 
                     case TitleOption.Settings:
-                        settingsScreen.Setup();
-                        settingsScreen.Play();
-                        settingsScreen.Hide();
+                        screen = settingsScreen;
                         break;
+                }
 
-                    case TitleOption.Exit:
-                        playing = false;
-                        break;
+                if (screen != null)
+                {
+                    screen.Setup();
+                    screen.Play();
+                    screen.Hide();
                 }
             }
 
+            //Saves the settings and collection files
             Collection.WriteToFile(COLLECTION_FILE);
             Settings.WriteToFile(SETTINGS_FILE);
+
+            //Sets the console text color to white so that the output can be read.
             Console.ForegroundColor = ConsoleColor.White;
         }
 
