@@ -68,7 +68,7 @@ namespace FinalProject.Screens
             yesNoButtons[1] = new Button("No", false, doors[1].Right + 1, doors[0].Bottom + 4);
 
             //Creates the textbox
-            textBox = new TextBox(doors[0].X + 2, doors[0].Bottom + 8, doors[2].Right - doors[0].X - 4, 7, BorderType.DoubleLine);
+            textBox = new TextBox(doors[0].X + 2, doors[0].Bottom + 8, doors[2].Right - doors[0].X - 4, 9, BorderType.DoubleLine);
         }
         #endregion
 
@@ -162,12 +162,13 @@ namespace FinalProject.Screens
                 textBox.WriteText("This prize is worth a total of " + prize.Price + "!");
                 textBox.WriteText();
                 textBox.WriteText("I hope you like this one better than the last one!");
+                Input.GetKey();
             }
 
             //---Game finish---//
             textBox.ClearText();
             textBox.WriteText();
-            textBox.WriteText("Congratulations! I hope that you enjoy your brand new " + prize.Name + "!", TextAlign.Center);
+            textBox.WriteText("Congratulations! I hope that your prize!", TextAlign.Center);
             textBox.WriteText();
             textBox.WriteText("Would you like so see all of your potential prizes?", TextAlign.Center);
 
