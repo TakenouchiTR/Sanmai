@@ -48,7 +48,7 @@ namespace FinalProject.Screens
             buttons[0] = new Button("Play", true, Console.WindowWidth / 2 - 19, Console.WindowHeight - 4);
             buttons[1] = new Button("Collection", false, Console.WindowWidth / 2 - 12, Console.WindowHeight - 4);
             buttons[2] = new Button("Settings", false, Console.WindowWidth / 2 + 1, Console.WindowHeight - 4);
-            buttons[3] = new Button("Exit", false, Console.WindowWidth / 2 + 13, Console.WindowHeight - 4);
+            buttons[3] = new Button("Exit", false, Console.WindowWidth / 2 + 12, Console.WindowHeight - 4);
         }
         #endregion
 
