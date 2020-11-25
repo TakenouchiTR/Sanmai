@@ -16,7 +16,7 @@ namespace FinalProject.Screens
         /// <summary>
         /// Clears the Screen from the console.
         /// </summary>
-        public void Hide() 
+        public virtual void Hide() 
         {
             Console.Clear();
         }
