@@ -190,6 +190,9 @@ namespace FinalProject.UI
             textLine = 0;
         }
 
+        /// <summary>
+        /// Clears a line of text without going to the next line
+        /// </summary>
         public void ClearLine()
         {
             if (textLine >= height - 2)
