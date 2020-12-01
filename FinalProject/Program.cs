@@ -104,6 +104,8 @@ namespace FinalProject
         /// </summary>
         private static void Initialize()
         {
+            Console.Title = "Sanmai";
+
             //Prevents the window from being reized, which will mess with the display
             DeleteMenu(GetSystemMenu(GetConsoleWindow(), false), SC_MAXIMIZE, MF_BYCOMMAND);
             DeleteMenu(GetSystemMenu(GetConsoleWindow(), false), SC_SIZE, MF_BYCOMMAND);
