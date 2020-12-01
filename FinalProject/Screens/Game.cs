@@ -136,9 +136,8 @@ namespace FinalProject.Screens
                 textBox.ClearText();
                 textBox.WriteText("You got " + prize.Name + "!");
                 textBox.WriteText(prize.Description);
-                textBox.WriteText("This prize is worth a total of " + prize.Price + "!");
-                textBox.WriteText();
-                textBox.WriteText("If you don't want this, you can try your luck at one of the other doors!");
+                textBox.ChangeLine(6);
+                textBox.WriteText("Would you like to open a different door instead?", TextAlign.Center);
 
                 //---Ask if the user wants to choose another door---//
                 HideButtons(doorButtons);
@@ -163,9 +162,10 @@ namespace FinalProject.Screens
                     textBox.ClearText();
                     textBox.WriteText("This time, you got " + prize.Name + "!");
                     textBox.WriteText(prize.Description);
-                    textBox.WriteText("This prize is worth a total of " + prize.Price + "!");
                     textBox.WriteText();
                     textBox.WriteText("I hope you like this one better than the last one!");
+                    textBox.ChangeLine(6);
+                    textBox.WriteText("Press enter to continue", TextAlign.Center);
                     Input.GetKey();
                 }
 
